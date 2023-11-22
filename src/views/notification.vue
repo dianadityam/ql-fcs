@@ -1,11 +1,15 @@
 <template>
   <LayoutMain>
-    <p>Notification Pagesdasdsad</p>
-    <div>
-      <FormField label="Grouped with icons">
-        <FormControl v-model="form.name" :icon="mdiAccount" />
-        <FormControl v-model="form.email" type="email" :icon="mdiMail" />
-      </FormField>
+    <div class="p-5">
+      <p>Notification Pagesdasdsad</p>
+      <p>Name : {{ form.name }}</p>
+      <p>Email: {{ form.email }}</p>
+      <div>
+        <FormField label="Grouped with icons">
+          <FormControl v-model="form.name" :icon="mdiAccount" />
+          <FormControl v-model="form.email" type="email" :icon="mdiMail" />
+        </FormField>
+      </div>
     </div>
   </LayoutMain>
   />
@@ -18,6 +22,7 @@ import FormControl from "../components/FormControl.vue";
 import FormField from "../components/FormField.vue";
 
 const form = reactive({
-  name: "",
+  name: "ahdi",
+  email: "",
 });
 </script>

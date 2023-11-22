@@ -7,12 +7,12 @@ import {
   mdiWrench,
   mdiViewList,
   mdiCart,
-  mdiResponsive,
-  mdiPalette,
+  mdiDatabase,
+  mdiScaleBalance,
 } from '@mdi/js'
 export default [
   {
-    to: '/notification',
+    to: '/',
     icon: mdiEmailOutline,
     label: 'notification'
   },
@@ -34,22 +34,17 @@ export default [
   {
     to: '/inventory',
     label: 'inventory',
-    icon: mdiResponsive
+    icon: mdiDatabase
   },
   {
     to: 'accounting',
     label: 'accounting',
-    icon: mdiPalette
+    icon: mdiScaleBalance,
   },
   {
     to: '/fixedAsset',
     label: 'fixedAsset',
     icon: mdiAccountCircle
-  },
-  {
-    to: '/login',
-    label: 'Login',
-    icon: mdiLock
   },
   {
     to: '/hris',

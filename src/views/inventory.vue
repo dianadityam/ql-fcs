@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <LayoutMain class="w-full">
     <p>Inventory Page</p>
-  </div>
+  </LayoutMain>
 </template>
+<script setup>
+import LayoutMain from "../layouts/LayoutMain.vue";
+</script>

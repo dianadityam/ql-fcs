@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <LayoutMain class="w-full bg-red-500">
     <p>Fixed Asset Page</p>
-  </div>
+  </LayoutMain>
 </template>
+<script setup>
+import LayoutMain from "../layouts/LayoutMain.vue";
+</script>

@@ -1,5 +1,9 @@
 <template>
-  <div class="w-full bg-red-500">
+  <LayoutMain class="w-full bg-red-500">
     <p>Accounting Page</p>
-  </div>
+    <p></p>
+  </LayoutMain>
 </template>
+<script setup>
+import LayoutMain from "../layouts/LayoutMain.vue";
+</script>
