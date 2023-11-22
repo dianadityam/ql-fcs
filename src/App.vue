@@ -1,8 +1,7 @@
-<template>
-  <Sidebar />
-</template>
-
-<script>
-import Sidebar from './components/Sidebar.vue';
-export default { components: { Sidebar } };
+<script setup>
+import { RouterView } from 'vue-router';
 </script>
+
+<template>
+  <RouterView />
+</template>

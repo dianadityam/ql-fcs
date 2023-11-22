@@ -1,5 +1,9 @@
+<script setup>
+import Layout from '../layouts/Layout.vue';
+</script>
+
 <template>
-  <div>
+  <Layout>
     <p>HRIS Page</p>
-  </div>
+  </Layout>
 </template>
