@@ -1,9 +1,3 @@
-<script setup>
-import Layout from '../layouts/Layout.vue';
-import BaseIcon from '../components/BaseIcon.vue';
-import { mdiBell } from '@mdi/js';
-</script>
-
 <template>
   <LayoutMain>
     <div class="p-5">
