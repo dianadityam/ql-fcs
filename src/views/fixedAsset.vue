@@ -3,7 +3,10 @@ import Layout from '../layouts/Layout.vue';
 </script>
 
 <template>
-  <Layout>
+  <LayoutMain class="w-full bg-red-500">
     <p>Fixed Asset Page</p>
-  </Layout>
+  </LayoutMain>
 </template>
+<script setup>
+import LayoutMain from '../layouts/LayoutMain.vue';
+</script>

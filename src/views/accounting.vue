@@ -3,7 +3,11 @@ import Layout from '../layouts/Layout.vue';
 </script>
 
 <template>
-  <Layout>
+  <LayoutMain class="w-full bg-red-500">
     <p>Accounting Page</p>
-  </Layout>
+    <p></p>
+  </LayoutMain>
 </template>
+<script setup>
+import LayoutMain from '../layouts/LayoutMain.vue';
+</script>

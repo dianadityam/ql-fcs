@@ -5,11 +5,30 @@ import { mdiBell } from '@mdi/js';
 </script>
 
 <template>
-  <Layout>
-    <!-- <svg viewBox="0 0 24 24" :width="iconSize" :height="iconSize" class="inline-block">
-      <path fill="currentColor" :d="mdiBell" />
-    </svg> -->
-
-    <p>Notification Page</p>
-  </Layout>
+  <LayoutMain>
+    <div class="p-5">
+      <p>Notification Pagesdasdsad</p>
+      <p>Name : {{ form.name }}</p>
+      <p>Email: {{ form.email }}</p>
+      <div>
+        <FormField label="Grouped with icons">
+          <FormControl v-model="form.name" :icon="mdiAccount" />
+          <FormControl v-model="form.email" type="email" :icon="mdiMail" />
+        </FormField>
+      </div>
+    </div>
+  </LayoutMain>
+  />
 </template>
+<script setup>
+import { reactive } from 'vue';
+import LayoutMain from '../layouts/LayoutMain.vue';
+import { mdiAccount, mdiMail } from '@mdi/js';
+import FormControl from '../components/FormControl.vue';
+import FormField from '../components/FormField.vue';
+
+const form = reactive({
+  name: 'ahdi',
+  email: '',
+});
+</script>
