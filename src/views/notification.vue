@@ -15,14 +15,14 @@
   />
 </template>
 <script setup>
-import { reactive } from "vue";
-import LayoutMain from "../layouts/LayoutMain.vue";
-import { mdiAccount, mdiMail } from "@mdi/js";
-import FormControl from "../components/FormControl.vue";
-import FormField from "../components/FormField.vue";
+import { reactive } from 'vue';
+import LayoutMain from '../layouts/LayoutMain.vue';
+import { mdiAccount, mdiMail } from '@mdi/js';
+import FormControl from '../components/FormControl.vue';
+import FormField from '../components/FormField.vue';
 
 const form = reactive({
-  name: "ahdi",
-  email: "",
+  name: 'ahdi',
+  email: '',
 });
 </script>

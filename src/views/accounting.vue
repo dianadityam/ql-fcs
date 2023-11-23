@@ -5,5 +5,5 @@
   </LayoutMain>
 </template>
 <script setup>
-import LayoutMain from "../layouts/LayoutMain.vue";
+import LayoutMain from '../layouts/LayoutMain.vue';
 </script>

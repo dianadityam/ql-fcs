@@ -4,48 +4,48 @@ const routes = [
   {
     path: '/',
     name: 'notification',
-    component: () => import('../views/notification.vue')
+    component: () => import('../views/notification.vue'),
   },
   {
     path: '/setup',
     name: 'setup',
-    component: () => import('../views/setup.vue')
+    component: () => import('../views/setup.vue'),
   },
   {
     path: '/marketing',
     name: 'marketing',
-    component: () => import('../views/marketing.vue')
+    component: () => import('../views/marketing.vue'),
   },
   {
     path: '/purchasing',
     name: 'purchasing',
-    component: () => import('../views/purchasing.vue')
+    component: () => import('../views/purchasing.vue'),
   },
   {
     path: '/inventory',
     name: 'inventory',
-    component: () => import('../views/inventory.vue')
+    component: () => import('../views/inventory.vue'),
   },
   {
     path: '/accounting',
     name: 'accounting',
-    component: () => import('../views/accounting.vue')
+    component: () => import('../views/accounting.vue'),
   },
   {
     path: '/fixedAsset',
     name: 'fixedAsset',
-    component: () => import('../views/fixedAsset.vue')
+    component: () => import('../views/fixedAsset.vue'),
   },
   {
     path: '/hris',
     name: 'hris',
-    component: () => import('../views/hris.vue')
-  }
-]
+    component: () => import('../views/hris.vue'),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 });
 
 export default router;
