@@ -108,14 +108,14 @@ if (props.ctrlKFocus) {
     }
   };
 
-  onMounted(() => {
-    if (!mainStore.isFieldFocusRegistered) {
-      window.addEventListener("keydown", fieldFocusHook);
-      mainStore.isFieldFocusRegistered = true;
-    } else {
-      // console.error('Duplicate field focus event')
-    }
-  });
+  // onMounted(() => {
+  //   if (!mainStore.isFieldFocusRegistered) {
+  //     window.addEventListener("keydown", fieldFocusHook);
+  //     mainStore.isFieldFocusRegistered = true;
+  //   } else {
+  //     // console.error('Duplicate field focus event')
+  //   }
+  // });
 
   onBeforeUnmount(() => {
     window.removeEventListener("keydown", fieldFocusHook);

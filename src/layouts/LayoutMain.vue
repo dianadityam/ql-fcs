@@ -19,15 +19,15 @@ router.beforeEach(() => {
   isAsideLgActive.value = false;
 });
 
-// const menuClick = (event, item) => {
-//   if (item.isToggleLightDark) {
-//     darkModeStore.set();
-//   }
+const menuClick = (event, item) => {
+  if (item.isToggleLightDark) {
+    darkModeStore.set();
+  }
 
-//   if (item.isLogout) {
-//     //
-//   }
-// };
+  if (item.isLogout) {
+    //
+  }
+};
 </script>
 
 <template>
