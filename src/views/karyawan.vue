@@ -4,7 +4,7 @@
       <h1>Master Karyawan Form</h1>
       <div class="content-section">
         <strong>Master Karyawan Header</strong>
-        <p class="font-bold text-red-600">New Data</p>
+        <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
           <FormField label="Nama">
             <FormControl />
@@ -14,7 +14,7 @@
           </FormField>
           <FormField label="Tempat Tgl Lahir">
             <FormControl />
-            <FormControl />
+            <FormControl type="date" />
           </FormField>
           <FormField label="No ID">
             <FormControl />
@@ -32,13 +32,13 @@
             <FormControl />
           </FormField>
           <FormField label="Jenis Kelamin">
-            <FormControl />
+            <FormControl v-model="form.gender" type="select" :options="genderOptions" />
           </FormField>
           <FormField label="Agama">
-            <FormControl />
+            <FormControl v-model="form.religion" type="select" :options="religionOptions" />
           </FormField>
           <FormField label="Alamat KTP">
-            <FormControl />
+            <FormControl type="textarea" />
           </FormField>
           <FormField label="RT / RW">
             <FormControl />
@@ -55,7 +55,7 @@
         </div>
         <div class="grid grid-cols-2">
           <FormField label="Alamat Domisili">
-            <FormControl />
+            <FormControl type="textarea" />
           </FormField>
           <FormField label="RT / RW">
             <FormControl />
@@ -97,4 +97,23 @@
 import LayoutMain from '@/layouts/LayoutMain.vue';
 import FormField from '@/components/FormField.vue';
 import FormControl from '@/components/FormControl.vue';
+import { reactive } from 'vue';
+
+const genderOptions = [
+  { id: 1, label: 'L' },
+  { id: 2, label: 'P' },
+];
+
+const religionOptions = [
+  { id: 1, label: 'ISLAM' },
+  { id: 2, label: 'KRISTEN' },
+  { id: 3, label: 'HINDU' },
+  { id: 4, label: 'BUDDHA' },
+  { id: 5, label: 'KONGHUCU' },
+];
+
+const form = reactive({
+  gender: genderOptions[0],
+  religion: religionOptions[0],
+});
 </script>
