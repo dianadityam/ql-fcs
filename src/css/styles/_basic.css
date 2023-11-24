@@ -1,7 +1,7 @@
 @layer components {
   .style-basic:not(.dark) {
     .aside {
-      @apply bg-gray-800;
+      background-color: #091943;
     }
     .aside-scrollbars {
       @apply aside-scrollbars-gray;
