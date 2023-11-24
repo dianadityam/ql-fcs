@@ -41,6 +41,11 @@ const routes = [
     name: 'hris',
     component: () => import('../views/hris.vue'),
   },
+  {
+    path: '/pricelist-supplier',
+    name: 'hris',
+    component: () => import('../master/purchasing/pricelist-supplier.vue'),
+  },
 ];
 
 const router = createRouter({
