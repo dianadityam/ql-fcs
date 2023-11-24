@@ -1,13 +1,13 @@
 <script setup>
-import { mdiForwardburger, mdiBackburger, mdiMenu } from "@mdi/js";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import menuAside from "../menuAside.js";
+import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import menuAside from '../menuAside.js';
 // import { useDarkModeStore } from "../store/darkMode.js";
-import BaseIcon from "../components/BaseIcon.vue";
-import AsideMenu from "../components/AsideMenu.vue";
+import BaseIcon from '../components/BaseIcon.vue';
+import AsideMenu from '../components/AsideMenu.vue';
 
-const layoutAsidePadding = "xl:pl-60";
+const layoutAsidePadding = 'xl:pl-60';
 
 const router = useRouter();
 
@@ -80,15 +80,6 @@ router.beforeEach(() => {
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
-      <!-- <FooterBar>
-        Get more with
-        <a
-          href="https://tailwind-vue.justboil.me/"
-          target="_blank"
-          class="text-blue-600"
-          >Premium version</a
-        >
-      </FooterBar> -->
     </div>
   </div>
 </template>
