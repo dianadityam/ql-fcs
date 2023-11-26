@@ -3,8 +3,28 @@
 @tailwind utilities;
 
 body {
-  background-color: white !important;
+  background-color: #f4f4f4 !important;
+  font-family: 'Open Sans', sans-serif;
 }
+
+h1 {
+  font-size: 24px;
+}
+
+strong {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 145px 380px;
+  gap: 10px;
+}
+
 .aside {
   background-color: #091943;
   font-size: 14px;
@@ -16,10 +36,10 @@ body {
   background-color: #041339;
 }
 .aside-menu-item {
-  @apply text-gray-300 hover:text-white;
+  @apply text-gray-300 hover:font-bold;
 }
 .aside-menu-item-active {
-  @apply text-white;
+  @apply text-white bg-[#2F80ED];
 }
 .aside-menu-dropdown {
   @apply bg-gray-700/50;
@@ -32,4 +52,11 @@ body {
 }
 .overlay {
   @apply from-gray-700 via-gray-900 to-gray-700;
+}
+.content-section {
+  margin: 20px auto;
+  border-top: #2f80ed solid;
+  border-radius: 3px;
+  background-color: white;
+  padding: 26px;
 }

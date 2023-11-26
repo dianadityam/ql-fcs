@@ -12,6 +12,21 @@ const routes = [
     component: () => import('../views/setup.vue'),
   },
   {
+    path: '/master/karyawan',
+    name: 'karyawan',
+    component: () => import('../views/karyawan.vue'),
+  },
+  {
+    path: '/master/profile',
+    name: 'profile',
+    component: () => import('../views/profile.vue'),
+  },
+  {
+    path: '/create/profile',
+    name: 'create profile',
+    component: () => import('../views/createProfile.vue'),
+  },
+  {
     path: '/marketing',
     name: 'marketing',
     component: () => import('../views/marketing.vue'),

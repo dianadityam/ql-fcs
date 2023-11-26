@@ -9,59 +9,78 @@ import {
   mdiCart,
   mdiDatabase,
   mdiScaleBalance,
-} from '@mdi/js'
+} from '@mdi/js';
 export default [
   {
     to: '/',
     icon: mdiEmailOutline,
-    label: 'notification'
+    label: 'NOTIFICATION',
   },
   {
-    to: '/setup',
-    label: 'setup',
-    icon: mdiWrench
+    label: 'SETUP',
+    icon: mdiWrench,
+    // to: '/setup',
+    menu: [
+      {
+        label: 'MASTER',
+        menu: [
+          {
+            label: 'GENERAL',
+            to: '/master/general',
+          },
+          {
+            label: 'KARYAWAN',
+            to: '/master/karyawan',
+          },
+          {
+            label: 'MERK',
+            to: '/master/merk',
+          },
+        ],
+      },
+    ],
   },
   {
     to: '/marketing',
-    label: 'marketing',
-    icon: mdiBagChecked
+    label: 'MARKETING',
+    icon: mdiBagChecked,
   },
   {
     to: '/purchasing',
-    label: 'purchasing',
-    icon: mdiCart
+    label: 'PURCHASING',
+    icon: mdiCart,
   },
   {
     to: '/inventory',
-    label: 'inventory',
-    icon: mdiDatabase
+    label: 'INVENTORY',
+    icon: mdiDatabase,
   },
   {
     to: 'accounting',
-    label: 'accounting',
+    label: 'ACCOUNTING',
     icon: mdiScaleBalance,
   },
   {
     to: '/fixedAsset',
-    label: 'fixedAsset',
-    icon: mdiAccountCircle
+    label: 'FIXED ASSET',
+    icon: mdiAccountCircle,
   },
   {
     to: '/hris',
-    label: 'hris',
-    icon: mdiAlertCircle
+    label: 'HRIS',
+    icon: mdiAlertCircle,
   },
   {
     label: 'Dropdown',
     icon: mdiViewList,
     menu: [
       {
-        label: 'Item One'
+        label: 'Item One',
       },
       {
-        label: 'Item Two'
-      }
-    ]
+        label: 'Item Two',
+      },
+    ],
   },
   // {
   //   href: 'https://github.com/justboil/admin-one-vue-tailwind',
@@ -75,4 +94,4 @@ export default [
   //   icon: mdiReact,
   //   target: '_blank'
   // }
-]
+];

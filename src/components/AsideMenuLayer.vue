@@ -37,12 +37,10 @@ const asideLgCloseClick = (event) => {
   >
     <div class="aside flex-1 flex flex-col overflow-hidden bg-[#091943]">
       <div
-        class="aside-brand flex flex-row h-14 items-center justify-between bg-[#091943]"
+        class="aside-brand flex flex-row h-14 items-center justify-between px-6 bg-[#041339]"
       >
-        <div
-          class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0"
-        >
-          <b class="font-black">One</b>
+        <div class="text-white flex-1 xl:pl-0">
+          <p class="font-white">MENU</p>
         </div>
         <button
           class="hidden lg:inline-block xl:hidden p-3"

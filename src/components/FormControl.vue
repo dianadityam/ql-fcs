@@ -61,8 +61,9 @@ const computedValue = computed({
 
 const inputElClass = computed(() => {
   const base = [
-    "px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full",
-    computedType.value === "textarea" ? "h-24" : "h-12",
+    "px-3 max-w-full focus:ring focus:outline-none border-gray-700 rounded",
+    computedType.value === "select" ? "" : "py-2 w-full",
+    computedType.value === "textarea" ? "h-24" : "h-7",
     props.borderless ? "border-0" : "border",
     props.transparent ? "bg-transparent" : "bg-white",
   ];
@@ -108,14 +109,14 @@ if (props.ctrlKFocus) {
     }
   };
 
-  // onMounted(() => {
-  //   if (!mainStore.isFieldFocusRegistered) {
-  //     window.addEventListener("keydown", fieldFocusHook);
-  //     mainStore.isFieldFocusRegistered = true;
-  //   } else {
-  //     // console.error('Duplicate field focus event')
-  //   }
-  // });
+  onMounted(() => {
+    if (!mainStore.isFieldFocusRegistered) {
+      window.addEventListener("keydown", fieldFocusHook);
+      mainStore.isFieldFocusRegistered = true;
+    } else {
+      // console.error('Duplicate field focus event')
+    }
+  });
 
   onBeforeUnmount(() => {
     window.removeEventListener("keydown", fieldFocusHook);
@@ -148,6 +149,16 @@ if (props.ctrlKFocus) {
       :class="inputElClass"
       :name="name"
       :maxlength="maxlength"
+      :placeholder="placeholder"
+      :required="required"
+    />
+    <input
+      type="date"
+      v-else-if="computedType === 'date'"
+      :id="id"
+      v-model="computedValue"
+      :class="inputElClass"
+      :name="name"
       :placeholder="placeholder"
       :required="required"
     />

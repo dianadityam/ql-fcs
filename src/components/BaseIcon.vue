@@ -12,7 +12,7 @@ const props = defineProps({
   },
   h: {
     type: String,
-    default: 'h-6',
+    default: 'h-11',
   },
   size: {
     type: [String, Number],
