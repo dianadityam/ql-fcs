@@ -156,6 +156,15 @@ if (props.ctrlKFocus) {
       :placeholder="placeholder"
       :required="required"
     />
+
+    <input
+      type="checkbox"
+      v-else-if="computedType === 'checkbox'"
+      :id="id"
+      v-model="computedValue"
+      :name="name"
+    />
+
     <input
       v-else
       :id="id"
