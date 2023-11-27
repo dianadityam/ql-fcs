@@ -16,7 +16,7 @@ const props = defineProps({
 });
 
 const setClass = () => {
-  let base = `${props.outline ? "bg-white" : props.bg} rounded`;
+  let base = `${props.outline ? "bg-white" : props.bg} rounded bg-[#4CAE4C]`;
   let hover = `hover:bg-opacity-90`;
   let focus = `focus:${props.bg} focus:outline-none focus:ring-0`;
   let active = `active:brightness-90`;
