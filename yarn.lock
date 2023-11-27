@@ -323,10 +323,18 @@
     "datatables.net-responsive" ">=2.4.1"
     "jquery" ">=1.7"
 
-"datatables.net-responsive@>=2.4.1":
+"datatables.net-responsive@^2.5.0", "datatables.net-responsive@>=2.4.1":
   "integrity" "sha512-GL7DFiRl5qqrp5ql54Psz92xTGPR0rMcrO3hzNxMfvcfpRGL5zFNTvMpTUh59Erm6u1+KoX+j+Ig1ZD3r0iFsA=="
   "resolved" "https://registry.npmjs.org/datatables.net-responsive/-/datatables.net-responsive-2.5.0.tgz"
   "version" "2.5.0"
+  dependencies:
+    "datatables.net" ">=1.13.4"
+    "jquery" ">=1.7"
+
+"datatables.net-select@^1.7.0":
+  "integrity" "sha512-ps8eL8S2gUV7EdzMraw8mfQlHXpfuc8TC2onBxdk0snP8eizPe85VhpI3r4ULvPRTTI7vcViz8E7JV8aayA2lw=="
+  "resolved" "https://registry.npmjs.org/datatables.net-select/-/datatables.net-select-1.7.0.tgz"
+  "version" "1.7.0"
   dependencies:
     "datatables.net" ">=1.13.4"
     "jquery" ">=1.7"
