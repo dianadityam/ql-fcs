@@ -37,6 +37,7 @@ const emit = defineEmits(['get-row-data']);
 
 onMounted(() => {
   dt = table.value.dt;
+  console.log(dt);
 });
 
 defineProps({
