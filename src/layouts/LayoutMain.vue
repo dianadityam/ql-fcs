@@ -3,9 +3,9 @@ import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import menuAside from '../menuAside.js';
-// import { useDarkModeStore } from "../store/darkMode.js";
 import BaseIcon from '../components/BaseIcon.vue';
 import AsideMenu from '../components/AsideMenu.vue';
+import Footer from '../components/Footer.vue';
 
 const layoutAsidePadding = 'xl:pl-60';
 
@@ -80,6 +80,9 @@ router.beforeEach(() => {
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
+      <Footer>
+        <span> All rights reserved.</span>
+      </Footer>
     </div>
   </div>
 </template>
