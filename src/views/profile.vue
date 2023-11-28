@@ -1,13 +1,19 @@
 <template>
   <LayoutMain>
-    <div class="px-9">
+    <div class="px-9 min-h-screen">
       <h1>Profile List</h1>
       <div class="content-section">
         <router-link to="/create/profile">
           <button class="border-[#428BCA] p-3">Create New</button>
         </router-link>
         <div class="my-5">
-          <TableData :data="user" :columns="columns" :tableHeader="tableHeader" />
+          <TableData
+            :data="user"
+            :columns="columns"
+            :tableHeader="tableHeader"
+            :tableOptions="tableOptions"
+            checkable
+          />
         </div>
       </div>
     </div>
@@ -20,6 +26,11 @@ import TableData from '@/components/TableData.vue';
 import { ref, onMounted } from 'vue';
 import service from '../services';
 
+const tableOptions = {
+  responsive: true,
+  processing: true,
+};
+
 const tableHeader = [
   { id: 1, title: 'No.' },
   { id: 2, title: 'User Log in' },
@@ -30,6 +41,7 @@ const tableHeader = [
 ];
 
 const user = ref(null);
+
 const columns = [
   { data: null, render: (data, type, row, meta) => meta.row + 1 },
   { data: 'email' },
@@ -47,7 +59,7 @@ const fetchData = async () => {
   });
   if (result.status === 200) {
     user.value = result.response.data;
-    console.log(user);
+    // console.log(user);
   }
 };
 
@@ -55,7 +67,3 @@ onMounted(() => {
   fetchData();
 });
 </script>
-
-<style>
-@import 'datatables.net-dt';
-</style>
