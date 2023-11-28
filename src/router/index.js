@@ -57,7 +57,7 @@ const routes = [
     component: () => import('../views/hris.vue'),
   },
   {
-    path: '/pricelist-supplier',
+    path: '/master/pricelist-supplier',
     name: 'hris',
     component: () => import('../master/purchasing/pricelist-supplier.vue'),
   },

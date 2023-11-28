@@ -24,7 +24,9 @@
         <div class="pt-5">
           <div class="grid grid-cols-4 max-w-lg gap-1">
             <p
-              @click="$router.push('/pricelist-supplier?tab=knitting-kain')"
+              @click="
+                $router.push('/master/pricelist-supplier?tab=knitting-kain')
+              "
               :class="
                 $route.query?.tab == 'knitting-kain'
                   ? tabActiveStyle
@@ -35,7 +37,9 @@
             </p>
             <p
               @click="
-                $router.push('/pricelist-supplier?tab=knitting-aksesoris')
+                $router.push(
+                  '/master/pricelist-supplier?tab=knitting-aksesoris'
+                )
               "
               :class="
                 $route.query?.tab == 'knitting-aksesoris'
@@ -46,7 +50,7 @@
               Knitting Aksesoris
             </p>
             <p
-              @click="$router.push('/pricelist-supplier?tab=woven')"
+              @click="$router.push('/master/pricelist-supplier?tab=woven')"
               :class="
                 $route.query?.tab == 'woven'
                   ? tabActiveStyle
@@ -56,7 +60,7 @@
               Woven
             </p>
             <p
-              @click="$router.push('/pricelist-supplier?tab=lain-lain')"
+              @click="$router.push('/master/pricelist-supplier?tab=lain-lain')"
               :class="
                 $route.query?.tab == 'lain-lain'
                   ? tabActiveStyle
