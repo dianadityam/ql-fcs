@@ -12,6 +12,21 @@ const routes = [
     component: () => import('../views/setup.vue'),
   },
   {
+    path: '/master/karyawan',
+    name: 'karyawan',
+    component: () => import('../views/karyawan.vue'),
+  },
+  {
+    path: '/master/profile',
+    name: 'profile',
+    component: () => import('../views/profile.vue'),
+  },
+  {
+    path: '/create/profile',
+    name: 'create profile',
+    component: () => import('../views/createProfile.vue'),
+  },
+  {
     path: '/marketing',
     name: 'marketing',
     component: () => import('../views/marketing.vue'),
@@ -40,6 +55,11 @@ const routes = [
     path: '/hris',
     name: 'hris',
     component: () => import('../views/hris.vue'),
+  },
+  {
+    path: '/master/pricelist-supplier',
+    name: 'hris',
+    component: () => import('../master/purchasing/pricelist-supplier.vue'),
   },
 ];
 

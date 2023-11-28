@@ -9,60 +9,89 @@ import {
   mdiCart,
   mdiDatabase,
   mdiScaleBalance,
-} from '@mdi/js'
-export default [
+} from '@mdi/js';
+
+import { ref } from 'vue'
+
+const menu = ref([
   {
     to: '/',
     icon: mdiEmailOutline,
-    label: 'notification'
+    label: 'NOTIFICATION',
+    toggle: false,
   },
   {
-    to: '/setup',
-    label: 'setup',
-    icon: mdiWrench
-  },
-  {
-    to: '/marketing',
-    label: 'marketing',
-    icon: mdiBagChecked
-  },
-  {
-    to: '/purchasing',
-    label: 'purchasing',
-    icon: mdiCart
-  },
-  {
-    to: '/inventory',
-    label: 'inventory',
-    icon: mdiDatabase
-  },
-  {
-    to: 'accounting',
-    label: 'accounting',
-    icon: mdiScaleBalance,
-  },
-  {
-    to: '/fixedAsset',
-    label: 'fixedAsset',
-    icon: mdiAccountCircle
-  },
-  {
-    to: '/hris',
-    label: 'hris',
-    icon: mdiAlertCircle
-  },
-  {
-    label: 'Dropdown',
-    icon: mdiViewList,
+    label: 'SETUP',
+    icon: mdiWrench,
+    toggle: false,
     menu: [
       {
-        label: 'Item One'
+        label: 'MASTER',
+        toggle: false,
+        to: '/pricelist-supplier',
+        menu: [
+          {
+            label: 'GENERAL',
+            to: '/master/general',
+          },
+          {
+            label: 'KARYAWAN',
+            to: '/master/karyawan',
+          },
+          {
+            label: 'MERK',
+            to: '/master/merk',
+          },
+          {
+            label: 'SUPPLIER',
+            to: '/master/pricelist-supplier?tab=knitting-kain',
+          },
+        ],
       },
-      {
-        label: 'Item Two'
-      }
-    ]
+    ],
   },
+  // {
+  //   to: '/marketing',
+  //   label: 'MARKETING',
+  //   icon: mdiBagChecked,
+  // },
+  // {
+  //   to: '/purchasing',
+  //   label: 'PURCHASING',
+  //   icon: mdiCart,
+  // },
+  // {
+  //   to: '/inventory',
+  //   label: 'INVENTORY',
+  //   icon: mdiDatabase,
+  // },
+  // {
+  //   to: 'accounting',
+  //   label: 'ACCOUNTING',
+  //   icon: mdiScaleBalance,
+  // },
+  // {
+  //   to: '/fixedAsset',
+  //   label: 'FIXED ASSET',
+  //   icon: mdiAccountCircle,
+  // },
+  // {
+  //   to: '/hris',
+  //   label: 'HRIS',
+  //   icon: mdiAlertCircle,
+  // },
+  // {
+  //   label: 'Dropdown',
+  //   icon: mdiViewList,
+  //   menu: [
+  //     {
+  //       label: 'Item One',
+  //     },
+  //     {
+  //       label: 'Item Two',
+  //     },
+  //   ],
+  // },
   // {
   //   href: 'https://github.com/justboil/admin-one-vue-tailwind',
   //   label: 'GitHub',
@@ -75,4 +104,6 @@ export default [
   //   icon: mdiReact,
   //   target: '_blank'
   // }
-]
+])
+
+export default menu

@@ -19,16 +19,14 @@ const emit = defineEmits(["menu-click"]);
 const hasColor = computed(() => props.item && props.item.color);
 
 const asideMenuItemActiveStyle = computed(() =>
-  hasColor.value ? "" : "aside-menu-item-active font-bold"
+  hasColor.value ? "" : "aside-menu-item-active"
 );
 
 const isDropdownActive = ref(false);
 
 const componentClass = computed(() => [
-  props.isDropdownList ? "py-3 px-6 text-sm" : "py-3",
-  hasColor.value
-    ? getButtonColor(props.item.color, false, true)
-    : `aside-menu-item dark:text-slate-300 dark:hover:text-white`,
+  props.isDropdownList ? "py-3 pl-6 text-sm" : "",
+  hasColor.value ? getButtonColor(props.item.color, false, true) : `text-white`,
 ]);
 
 const hasDropdown = computed(() => !!props.item.menu);
@@ -37,7 +35,7 @@ const menuClick = (event) => {
   emit("menu-click", event, props.item);
 
   if (hasDropdown.value) {
-    isDropdownActive.value = !isDropdownActive.value;
+    if (props.item.label) isDropdownActive.value = !isDropdownActive.value;
   }
 };
 </script>
@@ -57,13 +55,13 @@ const menuClick = (event) => {
       <BaseIcon
         v-if="item.icon"
         :path="item.icon"
-        class="flex-none"
+        class="flex-none h-11"
         :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
         w="w-16"
         :size="18"
       />
       <span
-        class="grow text-ellipsis line-clamp-1"
+        class="grow text-ellipsis flex items-center"
         :class="[
           { 'pr-12': !hasDropdown },
           vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '',
@@ -73,7 +71,7 @@ const menuClick = (event) => {
       <BaseIcon
         v-if="hasDropdown"
         :path="isDropdownActive ? mdiMinus : mdiPlus"
-        class="flex-none"
+        class="flex-none h-11"
         :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
         w="w-12"
       />
