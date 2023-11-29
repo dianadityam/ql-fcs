@@ -80,9 +80,11 @@
   </LayoutMain>
 </template>
 <script setup>
+import { onMounted } from "vue";
 import { mdiMagnify, mdiPlus } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import { defineAsyncComponent, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 
 const KnittingKain = defineAsyncComponent(() =>
   import("../purchasing/tabs/knitting-kain.vue")
@@ -99,4 +101,10 @@ const LainLain = defineAsyncComponent(() =>
 
 const tabActiveStyle =
   "border-b-[3px] pb-1.5 text-center border-blue-500 font-semibold cursor-pointer";
+
+const router = useRouter();
+
+onMounted(() => {
+  router.push("/master/pricelist-supplier?tab=knitting-kain");
+});
 </script>

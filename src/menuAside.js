@@ -44,7 +44,7 @@ const menu = ref([
           },
           {
             label: 'SUPPLIER',
-            to: '/master/pricelist-supplier?tab=knitting-kain',
+            to: '/master/pricelist-supplier',
           },
         ],
       },
