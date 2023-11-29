@@ -3,42 +3,33 @@
     <div class="px-9">
       <h1>Form Profile</h1>
       <div class="content-section">
-        <strong>Profile Header</strong>
+        <strong>Role Header</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
-          <FormField label="NIK">
-            <div>
-              <input type="text" class="border-2 px-2" v-model="form.nik" disabled />
-              <button @click="showKaryawanModal">Cari</button>
-            </div>
-          </FormField>
-          <FormField label="Nama">
-            <input type="text" class="border-2 px-2" disabled v-model="form.nama" />
-          </FormField>
-          <FormField label="User Login">
-            <FormControl v-model="form.username" />
-          </FormField>
-          <FormField label="Tipe User">
-            <FormControl v-model="form.usertype" type="select" :options="typeOptions" />
-          </FormField>
-          <FormField label="Password">
-            <FormControl v-model="form.password" />
+          <FormField label="Code">
+            <FormControl v-model="form.code" />
           </FormField>
           <FormField label="Status">
             <FormControl v-model="form.status" type="select" :options="statusOptions" />
           </FormField>
-          <FormField label="Catatan Header">
-            <FormControl v-model="form.catatan" type="textarea" />
+          <FormField label="Nama">
+            <FormControl v-model="form.nama" />
           </FormField>
         </div>
         <div class="">
-          <strong class="block my-2">Profile Detail</strong>
+          <strong class="block my-2">Role Detail</strong>
+          <FormField label="Module">
+            <FormControl v-model="form.module" type="select" :options="moduleOptions" />
+          </FormField>
+          <FormField label="Type">
+            <FormControl v-model="form.module" type="select" :options="typeOptions" />
+          </FormField>
           <Button @click="toggleModal" color="info" class="" label="Add To List" small />
           <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
         </div>
         <div class="flex justify-between">
           <div>
-            <p>Test</p>
+            <p>Created by</p>
           </div>
           <div>
             <Button

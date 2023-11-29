@@ -80,6 +80,9 @@ const menuClick = (event, item) => {
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
+      <Footer>
+        <span> All rights reserved.</span>
+      </Footer>
     </div>
   </div>
 </template>

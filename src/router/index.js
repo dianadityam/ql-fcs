@@ -12,17 +12,27 @@ const routes = [
     component: () => import('../views/setup.vue'),
   },
   {
-    path: '/master/karyawan',
+    path: '/karyawan/master',
     name: 'karyawan',
     component: () => import('../views/karyawan.vue'),
   },
   {
-    path: '/master/profile',
+    path: '/profile/master',
     name: 'profile',
     component: () => import('../views/profile.vue'),
   },
   {
-    path: '/create/profile',
+    path: '/role/master',
+    name: 'role',
+    component: () => import('../views/RoleMaster.vue'),
+  },
+  {
+    path: '/role/form',
+    name: 'role form',
+    component: () => import('../views/RoleForm.vue'),
+  },
+  {
+    path: '/profile/form',
     name: 'create profile',
     component: () => import('../views/createProfile.vue'),
   },
