@@ -21,8 +21,9 @@ p {
 
 .form-grid {
   display: grid;
-  grid-template-columns: 145px 380px;
+  grid-template-columns: 100px 1fr;
   gap: 10px;
+  margin: 10px 20px 10px 0;
 }
 
 .aside {
