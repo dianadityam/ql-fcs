@@ -7,7 +7,9 @@ const year = new Date().getFullYear();
     <div class="text-center md:text-left">
       <b
         >Copyright &copy; {{ year }}
-        <a class="text-blue-600" href="https://qqltech.com/" target="_blank">Quantum Leap</a>.</b
+        <a class="text-blue-600" href="https://qqltech.com/" target="_blank"
+          >Quantum Leap</a
+        >.</b
       >
       <slot />
     </div>

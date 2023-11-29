@@ -6,6 +6,7 @@ import menu from "@/menuAside";
 // import { useDarkModeStore } from "../store/darkMode.js";
 import BaseIcon from "../components/BaseIcon.vue";
 import AsideMenu from "../components/AsideMenu.vue";
+import Footer from ".././components/Footer.vue";
 
 const layoutAsidePadding = "xl:pl-60";
 
@@ -80,9 +81,9 @@ const menuClick = (event, item) => {
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
-      <Footer>
+      <!-- <Footer>
         <span> All rights reserved.</span>
-      </Footer>
+      </Footer> -->
     </div>
   </div>
 </template>

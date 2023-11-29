@@ -12,17 +12,17 @@ const routes = [
     component: () => import('../views/setup.vue'),
   },
   {
-    path: '/karyawan/master',
+    path: '/master/karyawan',
     name: 'karyawan',
     component: () => import('../views/karyawan.vue'),
   },
   {
-    path: '/profile/master',
+    path: '/master/profile',
     name: 'profile',
     component: () => import('../views/profile.vue'),
   },
   {
-    path: '/role/master',
+    path: '/master/role',
     name: 'role',
     component: () => import('../views/RoleMaster.vue'),
   },
