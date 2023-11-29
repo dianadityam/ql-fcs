@@ -1,14 +1,14 @@
 <template>
   <LayoutMain>
     <div class="px-9 min-h-screen">
-      <h1>Profile List</h1>
+      <h1>Role List</h1>
       <div class="content-section">
-        <router-link to="/profile/form">
+        <router-link to="/role/form">
           <Button class="p-3" color="info" outline label="Create New" />
         </router-link>
         <div class="my-5">
           <TableData
-            :data="user"
+            :data="roles"
             :columns="columns"
             :tableHeader="tableHeader"
             :tableOptions="tableOptions"
@@ -41,7 +41,7 @@ const tableHeader = [
   { id: 6, title: 'Created' },
 ];
 
-const user = ref(null);
+const roles = ref(null);
 
 const columns = [
   { data: null, render: (data, type, row, meta) => meta.row + 1 },
@@ -55,12 +55,12 @@ const columns = [
 const fetchData = async () => {
   const result = await service({
     method: 'GET',
-    url: 'operation/default_users?paginate=100',
+    url: 'operation/m_roles',
     token: true,
   });
   if (result.status === 200) {
-    user.value = result.response.data;
-    // console.log(user);
+    roles.value = result.response.data;
+    console.log(roles);
   }
 };
 

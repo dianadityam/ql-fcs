@@ -1,9 +1,7 @@
 <script setup>
-import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import menuAside from '../menuAside.js';
-import BaseIcon from '../components/BaseIcon.vue';
 import AsideMenu from '../components/AsideMenu.vue';
 import Footer from '../components/Footer.vue';
 
