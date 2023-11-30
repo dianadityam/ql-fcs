@@ -58,4 +58,36 @@ DataTable.use(DataTablesCore);
 
 <style>
 @import 'datatables.net-dt';
+table {
+  margin: 0 0 150px 0 !important;
+}
+.datatable {
+  font-size: 14px;
+}
+.dataTables_wrapper .dataTables_length select {
+  margin: 0 10px;
+  padding: 4px 6px;
+  border: 1px solid #cccccc;
+}
+.dataTables_wrapper .dataTables_filter input {
+  margin: 0 0 0 10px;
+  border: 1px solid #cccccc;
+}
+.dataTables_wrapper .dataTables_filter {
+  margin: 0 0 30px 0;
+}
+.dataTables_wrapper .dataTables_length {
+  margin: 0 0 30px 0;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background: #2f80ed !important;
+  color: white !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+  border: solid 1px #cccccc;
+  border-radius: 3px;
+}
 </style>
