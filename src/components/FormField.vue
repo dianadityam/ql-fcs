@@ -36,7 +36,7 @@ const wrapperClass = computed(() => {
 
 <template>
   <div class="mb-6 last:mb-0 form-grid">
-    <label v-if="label" :for="labelFor" class="font-bold">{{ label }}</label>
+    <label v-if="label" :for="labelFor" class="font-bold text-sm">{{ label }}</label>
     <div :class="wrapperClass">
       <slot />
     </div>

@@ -4,7 +4,7 @@
       <h1>Role List</h1>
       <div class="content-section">
         <router-link to="/role/form">
-          <Button class="p-3" color="info" outline label="Create New" />
+          <Button class="py-2" color="info" outline label="Create New" small />
         </router-link>
         <div class="my-5">
           <TableData
@@ -34,20 +34,18 @@ const tableOptions = {
 
 const tableHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'User Log in' },
+  { id: 2, title: 'Kode' },
   { id: 3, title: 'Nama' },
-  { id: 4, title: 'Tipe User' },
-  { id: 5, title: 'Status' },
-  { id: 6, title: 'Created' },
+  { id: 4, title: 'Status' },
+  { id: 5, title: 'Created' },
 ];
 
 const roles = ref(null);
 
 const columns = [
-  { data: null, render: (data, type, row, meta) => meta.row + 1 },
-  { data: 'email' },
-  { data: 'username' },
-  { data: 'usertype' },
+  { width: '5%', data: null, render: (data, type, row, meta) => meta.row + 1 },
+  { data: 'kode' },
+  { data: 'nama' },
   { data: 'status' },
   { data: 'created_at' },
 ];

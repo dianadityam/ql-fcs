@@ -4,7 +4,7 @@
       <h1>Profile List</h1>
       <div class="content-section">
         <router-link to="/profile/form">
-          <Button class="p-3" color="info" outline label="Create New" />
+          <Button class="mb-4" color="info" outline label="Create New" small />
         </router-link>
         <div class="my-5">
           <TableData
