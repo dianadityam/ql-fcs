@@ -11,7 +11,7 @@ import {
   mdiScaleBalance,
 } from '@mdi/js';
 
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const menu = ref([
   {
@@ -30,6 +30,14 @@ const menu = ref([
         toggle: false,
         to: '/pricelist-supplier',
         menu: [
+          {
+            label: 'PROFIE',
+            to: '/master/profile',
+          },
+          {
+            label: 'ROLE',
+            to: '/master/role',
+          },
           {
             label: 'GENERAL',
             to: '/master/general',
@@ -104,6 +112,6 @@ const menu = ref([
   //   icon: mdiReact,
   //   target: '_blank'
   // }
-])
+]);
 
-export default menu
+export default menu;

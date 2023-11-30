@@ -16,17 +16,17 @@
             <FormControl v-model="form.nama" />
           </FormField>
         </div>
-        <div class="">
-          <strong class="block my-2">Role Detail</strong>
+        <strong class="block my-2">Role Detail</strong>
+        <div class="grid grid-cols-2 my-5">
           <FormField label="Module">
             <FormControl v-model="form.module" type="select" :options="moduleOptions" />
           </FormField>
           <FormField label="Type">
-            <FormControl v-model="form.module" type="select" :options="typeOptions" />
+            <FormControl v-model="form.type" type="select" :options="typeOptions" />
           </FormField>
-          <Button @click="toggleModal" color="info" class="" label="Add To List" small />
-          <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
         </div>
+        <Button @click="toggleModal" color="info" class="" label="Add To List" small />
+        <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
         <div class="flex justify-between">
           <div>
             <p>Created by</p>
@@ -177,9 +177,16 @@ const tableHeader = [
 const columns = [{ data: 'nik' }, { data: 'nama' }, { data: 'alamat_d' }, { data: 'id' }];
 
 const typeOptions = [
-  { id: 1, label: 'SUPER ADMIN' },
-  { id: 2, label: 'ADMIN' },
-  { id: 3, label: 'USER' },
+  { id: 1, label: 'Master' },
+  { id: 2, label: 'Transaction' },
+];
+
+const moduleOptions = [
+  { id: 1, label: 'SETUP' },
+  { id: 2, label: 'MARKETING' },
+  { id: 3, label: 'PURCHASING' },
+  { id: 4, label: 'ACCOUNTING' },
+  { id: 5, label: 'HRIS' },
 ];
 
 const statusOptions = [
@@ -190,7 +197,8 @@ const statusOptions = [
 const form = reactive({
   nik: null,
   nama: '',
-  usertype: typeOptions[2],
+  module: moduleOptions[2],
+  type: typeOptions[0],
   status: statusOptions[0],
   password: '',
   catatan: '',
