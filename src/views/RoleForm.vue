@@ -7,7 +7,7 @@
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
           <FormField label="Code">
-            <FormControl v-model="form.code" />
+            <FormControl v-model="form.kode" />
           </FormField>
           <FormField label="Status">
             <FormControl v-model="form.status" type="select" :options="statusOptions" />
@@ -25,8 +25,13 @@
             <FormControl v-model="form.type" type="select" :options="typeOptions" />
           </FormField>
         </div>
-        <Button @click="toggleModal" color="info" class="" label="Add To List" small />
-        <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
+        <Button @click="handleAddDetail" color="info" class="mb-5" label="Add To List" small />
+        <TableData
+          :tableHeader="detailListHeader"
+          :tableOptions="tableOptions"
+          :columns="columns"
+          :data="roleDetail"
+        />
         <div class="flex justify-between">
           <div>
             <p>Created by</p>
@@ -55,7 +60,7 @@
         </div>
       </div>
     </div>
-    <Modal
+    <!-- <Modal
       :showModal="isShowKaryawan"
       @toggle-modal="showKaryawanModal"
       @submit="setData"
@@ -87,7 +92,7 @@
         </DataTable>
       </template>
       <template #footer>Custom content</template>
-    </Modal>
+    </Modal> -->
   </LayoutMain>
 </template>
 
@@ -127,30 +132,53 @@ const fetchData = async () => {
 
 const onSubmit = () => {
   const dataToSubmit = {
-    ...form,
-    usertype: form.usertype.label,
+    kode: form.kode,
+    nama: form.nama,
     status: form.status.label,
+    m_roles_permission: roleDetail.value,
   };
   console.log(dataToSubmit);
   service({
     method: 'POST',
-    url: '/operation/default_users',
+    url: '/operation/m_roles',
     token: true,
     data: dataToSubmit,
   });
 };
 
-function setData() {
-  table.value.dt.rows({ selected: true }).every(function () {
-    selectedKaryawan.value.push(this.data());
-    isShowKaryawan.value = false;
+const roleDetail = ref([]);
+
+const handleAddDetail = () => {
+  roleDetail.value.push({
+    modul: form.module.label,
+    path: form.type.label,
+    menu: 'Departemen',
+    endpoint: `~${form.type.label.toLowerCase()}/${form.module.label.toLowerCase()}`,
   });
-}
+  console.log(roleDetail);
+};
+
+// function setData() {
+//   table.value.dt.rows({ selected: true }).every(function () {
+//     selectedKaryawan.value.push(this.data());
+//     isShowKaryawan.value = false;
+//   });
+// }
 
 const detailListHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'Kode Role' },
-  { id: 3, title: 'Nama Role' },
+  { id: 2, title: 'Module' },
+  { id: 3, title: 'Type' },
+  { id: 4, title: 'Menu Name' },
+  { id: 5, title: 'URL' },
+];
+
+const columns = [
+  { data: null, render: (data, type, row, meta) => meta.row + 1 },
+  { data: 'modul' },
+  { data: 'path' },
+  { data: 'menu' },
+  { data: 'endpoint' },
 ];
 
 const tableOptions = {
@@ -161,32 +189,15 @@ const tableOptions = {
 };
 
 DataTable.use(DataTablesCore);
-const tableKaryawanOptions = {
-  select: {
-    selector: 'td:first-child',
-  },
-};
 
-const tableHeader = [
-  { id: 1, title: 'NIK' },
-  { id: 2, title: 'Nama' },
-  { id: 3, title: 'Alamat' },
-  { id: 4, title: null },
-];
-
-const columns = [{ data: 'nik' }, { data: 'nama' }, { data: 'alamat_d' }, { data: 'id' }];
-
-const typeOptions = [
-  { id: 1, label: 'Master' },
-  { id: 2, label: 'Transaction' },
-];
+const typeOptions = [{ label: 'Master' }, { label: 'Transaction' }];
 
 const moduleOptions = [
-  { id: 1, label: 'SETUP' },
-  { id: 2, label: 'MARKETING' },
-  { id: 3, label: 'PURCHASING' },
-  { id: 4, label: 'ACCOUNTING' },
-  { id: 5, label: 'HRIS' },
+  { label: 'SETUP' },
+  { label: 'MARKETING' },
+  { label: 'PURCHASING' },
+  { label: 'ACCOUNTING' },
+  { label: 'HRIS' },
 ];
 
 const statusOptions = [
@@ -195,13 +206,11 @@ const statusOptions = [
 ];
 
 const form = reactive({
-  nik: null,
+  kode: '',
   nama: '',
   module: moduleOptions[2],
   type: typeOptions[0],
   status: statusOptions[0],
-  password: '',
-  catatan: '',
 });
 
 watch(

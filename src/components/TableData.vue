@@ -73,6 +73,9 @@ table {
   margin: 0 0 0 10px;
   border: 1px solid #cccccc;
 }
+table.dataTable.no-footer {
+  border: none;
+}
 .dataTables_wrapper .dataTables_filter {
   margin: 0 0 30px 0;
 }
