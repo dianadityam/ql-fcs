@@ -8,8 +8,22 @@
         <div class="grid grid-cols-2 my-5">
           <FormField label="NIK">
             <div>
-              <input type="text" class="border-2 px-2" v-model="form.nik" disabled />
-              <button @click="showKaryawanModal">Cari</button>
+              <div class="w-full max-w-xs relative">
+                <input
+                  placeholder="SUP0001"
+                  class="text-sm border px-2 py-1 focus:ring-1 bg-[#D2D6DE] focus:outline-none rounded-[4px] text-black w-full"
+                  v-model="form.nik"
+                  disabled
+                />
+                <BaseIcon
+                  :path="mdiMagnify"
+                  size="18"
+                  class="absolute right-0 h-7 w-9 border rounded-sm top-[1px] cursor-pointer"
+                  @click="showKaryawanModal"
+                />
+              </div>
+              <!-- <input type="text" class="border-2 px-2" v-model="form.nik" disabled /> -->
+              <!-- <button @click="showKaryawanModal">Cari</button> -->
             </div>
           </FormField>
           <FormField label="Nama">
@@ -112,6 +126,8 @@ import TableData from '@/components/TableData.vue';
 import Modal from '@/components/Modal.vue';
 import Button from '@/components/Button.vue';
 import service from '../services';
+import BaseIcon from '@/components/BaseIcon.vue';
+import { mdiMagnify } from '@mdi/js';
 import { reactive, ref, onMounted, watch } from 'vue';
 
 const selectedKaryawan = ref([]);
