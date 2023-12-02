@@ -6,10 +6,10 @@
         <strong>Warehouse Header</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid my-5 grid-cols-2">
-          <InputField label="Kode">
+          <InputField label="Kode" required>
             <Input v-model="form.kode" :options="userOptions" />
           </InputField>
-          <InputField label="Nama">
+          <InputField label="Nama" required>
             <Input v-model="form.nama" />
           </InputField>
           <InputField label="Catatan">
@@ -30,7 +30,7 @@
               label="Save"
               @click="onSubmit"
               :class="{ 'opacity-25': form.processing }"
-              :disabled="form.processing"
+              :disabled="form.processing || !isFormValid"
               small
             />
             <Button
@@ -38,6 +38,7 @@
               color="white"
               label="Cancel"
               @click="onSubmit"
+              class="ml-2"
               :class="{ 'opacity-25': form.processing }"
               :disabled="form.processing"
               small
@@ -54,24 +55,25 @@
 import LayoutMain from '@/layouts/LayoutMain.vue';
 import service from '@/services';
 import Button from '@/components/Button.vue';
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 
 const onSubmit = () => {
   const dataToSubmit = {
     ...form,
+    is_active: form.status.id,
   };
   console.log(dataToSubmit);
   service({
     method: 'POST',
-    url: '/operation/m_general',
+    url: '/operation/m_warehouse',
     token: true,
     data: dataToSubmit,
   });
 };
 
 const statusOptions = [
+  { id: 0, label: 'INAKTIF' },
   { id: 1, label: 'AKTIF' },
-  { id: 2, label: 'INAKTIF' },
 ];
 
 const form = reactive({
@@ -79,5 +81,9 @@ const form = reactive({
   nama: '',
   catatan: '',
   status: statusOptions[0],
+});
+
+const isFormValid = computed(() => {
+  return form.kode.trim() !== '' && form.nama.trim() !== '';
 });
 </script>
