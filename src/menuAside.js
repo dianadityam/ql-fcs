@@ -43,6 +43,14 @@ const menu = ref([
             to: '/master/general',
           },
           {
+            label: 'APPROVAL USER',
+            to: '/master/user-approval',
+          },
+          {
+            label: 'WAREHOUSE',
+            to: '/master/warehouse',
+          },
+          {
             label: 'KARYAWAN',
             to: '/master/karyawan',
           },
