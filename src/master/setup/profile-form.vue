@@ -6,11 +6,11 @@
         <strong>Profile Header</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
-          <InputField label="NIK">
+          <InputField label="NIK" required>
             <div>
               <div class="w-full max-w-xs relative">
                 <input
-                  placeholder="SUP0001"
+                  placeholder="Cari Data"
                   class="text-sm border px-2 py-1 focus:ring-1 bg-[#D2D6DE] focus:outline-none rounded-[4px] text-black w-full"
                   v-model="form.nik"
                   disabled
@@ -22,21 +22,24 @@
                   @click="showKaryawanModal"
                 />
               </div>
-              <!-- <input type="text" class="border-2 px-2" v-model="form.nik" disabled /> -->
-              <!-- <button @click="showKaryawanModal">Cari</button> -->
             </div>
           </InputField>
           <InputField label="Nama">
-            <input type="text" class="border-2 px-2" disabled v-model="form.nama" />
+            <input
+              type="text"
+              class="border-2 px-2 text-sm bg-[#D2D6DE]"
+              disabled
+              v-model="form.nama"
+            />
           </InputField>
-          <InputField label="User Login">
+          <InputField label="User Login" required>
             <Input v-model="form.username" />
           </InputField>
           <InputField label="Tipe User">
             <Input v-model="form.usertype" type="select" :options="typeOptions" />
           </InputField>
-          <InputField label="Password">
-            <Input v-model="form.password" />
+          <InputField label="Password" required>
+            <Input v-model="form.password" type="password" />
           </InputField>
           <InputField label="Status">
             <Input v-model="form.status" type="select" :options="statusOptions" />
@@ -61,14 +64,15 @@
               label="Save"
               @click="onSubmit"
               :class="{ 'opacity-25': form.processing }"
-              :disabled="form.processing"
+              :disabled="form.processing || !isFormValid"
               small
             />
             <Button
               type="submit"
               color="white"
               label="Cancel"
-              @click="onSubmit"
+              class="ml-2"
+              @click="$router.push('/master/profile')"
               :class="{ 'opacity-25': form.processing }"
               :disabled="form.processing"
               small
@@ -124,7 +128,7 @@ import Button from '@/components/Button.vue';
 import service from '@/services';
 import BaseIcon from '@/components/BaseIcon.vue';
 import { mdiMagnify } from '@mdi/js';
-import { reactive, ref, onMounted, watch } from 'vue';
+import { reactive, ref, onMounted, watch, computed } from 'vue';
 
 const selectedKaryawan = ref([]);
 const isShowKaryawan = ref(false);
@@ -209,8 +213,9 @@ const statusOptions = [
 ];
 
 const form = reactive({
-  nik: null,
+  nik: '',
   nama: '',
+  username: '',
   usertype: typeOptions[2],
   status: statusOptions[0],
   password: '',
@@ -229,6 +234,15 @@ watch(
   },
   { deep: true }
 );
+
+const isFormValid = computed(() => {
+  return (
+    form.nik.trim() !== '' &&
+    form.nama.trim() !== '' &&
+    form.username.trim() !== '' &&
+    form.password.trim() !== ''
+  );
+});
 const showKaryawanModal = () => {
   if (!isShowKaryawan.value && selectedKaryawan.value.length > 0) {
     selectedKaryawan.value = [];
