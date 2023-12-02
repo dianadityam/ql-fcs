@@ -3,38 +3,56 @@
     <div class="px-9">
       <h1>Form Profile</h1>
       <div class="content-section">
-        <strong>Role Header</strong>
+        <strong>Profile Header</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
-          <FormField label="Code">
-            <FormControl v-model="form.kode" />
-          </FormField>
-          <FormField label="Status">
-            <FormControl v-model="form.status" type="select" :options="statusOptions" />
-          </FormField>
-          <FormField label="Nama">
-            <FormControl v-model="form.nama" />
-          </FormField>
+          <InputField label="NIK">
+            <div>
+              <div class="w-full max-w-xs relative">
+                <input
+                  placeholder="SUP0001"
+                  class="text-sm border px-2 py-1 focus:ring-1 bg-[#D2D6DE] focus:outline-none rounded-[4px] text-black w-full"
+                  v-model="form.nik"
+                  disabled
+                />
+                <BaseIcon
+                  :path="mdiMagnify"
+                  size="18"
+                  class="absolute right-0 h-7 w-9 border rounded-sm top-[1px] cursor-pointer"
+                  @click="showKaryawanModal"
+                />
+              </div>
+              <!-- <input type="text" class="border-2 px-2" v-model="form.nik" disabled /> -->
+              <!-- <button @click="showKaryawanModal">Cari</button> -->
+            </div>
+          </InputField>
+          <InputField label="Nama">
+            <input type="text" class="border-2 px-2" disabled v-model="form.nama" />
+          </InputField>
+          <InputField label="User Login">
+            <Input v-model="form.username" />
+          </InputField>
+          <InputField label="Tipe User">
+            <Input v-model="form.usertype" type="select" :options="typeOptions" />
+          </InputField>
+          <InputField label="Password">
+            <Input v-model="form.password" />
+          </InputField>
+          <InputField label="Status">
+            <Input v-model="form.status" type="select" :options="statusOptions" />
+          </InputField>
+          <InputField label="Catatan Header">
+            <Input v-model="form.catatan" type="textarea" />
+          </InputField>
         </div>
-        <strong class="block my-2">Role Detail</strong>
-        <div class="grid grid-cols-2 my-5">
-          <FormField label="Module">
-            <FormControl v-model="form.module" type="select" :options="moduleOptions" />
-          </FormField>
-          <FormField label="Type">
-            <FormControl v-model="form.type" type="select" :options="typeOptions" />
-          </FormField>
+        <div class="">
+          <strong class="block my-2">Profile Detail</strong>
+          <Button @click="toggleModal" color="info" class="" label="Add To List" small />
+          <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
         </div>
-        <Button @click="handleAddDetail" color="info" class="mb-5" label="Add To List" small />
-        <TableData
-          :tableHeader="detailListHeader"
-          :tableOptions="tableOptions"
-          :columns="columns"
-          :data="roleDetail"
-        />
         <div class="flex justify-between">
           <div>
-            <p>Created by</p>
+            <p>Test</p>
           </div>
           <div>
             <Button
@@ -60,7 +78,7 @@
         </div>
       </div>
     </div>
-    <!-- <Modal
+    <Modal
       :showModal="isShowKaryawan"
       @toggle-modal="showKaryawanModal"
       @submit="setData"
@@ -92,7 +110,7 @@
         </DataTable>
       </template>
       <template #footer>Custom content</template>
-    </Modal> -->
+    </Modal>
   </LayoutMain>
 </template>
 
@@ -101,13 +119,11 @@ import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 import 'datatables.net-select';
 import 'datatables.net-responsive';
-import LayoutMain from '@/layouts/LayoutMain.vue';
-import FormField from '@/components/FormField.vue';
-import FormControl from '@/components/FormControl.vue';
-import TableData from '@/components/TableData.vue';
 import Modal from '@/components/Modal.vue';
 import Button from '@/components/Button.vue';
-import service from '../services';
+import service from '@/services';
+import BaseIcon from '@/components/BaseIcon.vue';
+import { mdiMagnify } from '@mdi/js';
 import { reactive, ref, onMounted, watch } from 'vue';
 
 const selectedKaryawan = ref([]);
@@ -132,53 +148,30 @@ const fetchData = async () => {
 
 const onSubmit = () => {
   const dataToSubmit = {
-    kode: form.kode,
-    nama: form.nama,
+    ...form,
+    usertype: form.usertype.label,
     status: form.status.label,
-    m_roles_permission: roleDetail.value,
   };
   console.log(dataToSubmit);
   service({
     method: 'POST',
-    url: '/operation/m_roles',
+    url: '/operation/default_users',
     token: true,
     data: dataToSubmit,
   });
 };
 
-const roleDetail = ref([]);
-
-const handleAddDetail = () => {
-  roleDetail.value.push({
-    modul: form.module.label,
-    path: form.type.label,
-    menu: 'Departemen',
-    endpoint: `~${form.type.label.toLowerCase()}/${form.module.label.toLowerCase()}`,
+function setData() {
+  table.value.dt.rows({ selected: true }).every(function () {
+    selectedKaryawan.value.push(this.data());
+    isShowKaryawan.value = false;
   });
-  console.log(roleDetail);
-};
-
-// function setData() {
-//   table.value.dt.rows({ selected: true }).every(function () {
-//     selectedKaryawan.value.push(this.data());
-//     isShowKaryawan.value = false;
-//   });
-// }
+}
 
 const detailListHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'Module' },
-  { id: 3, title: 'Type' },
-  { id: 4, title: 'Menu Name' },
-  { id: 5, title: 'URL' },
-];
-
-const columns = [
-  { data: null, render: (data, type, row, meta) => meta.row + 1 },
-  { data: 'modul' },
-  { data: 'path' },
-  { data: 'menu' },
-  { data: 'endpoint' },
+  { id: 2, title: 'Kode Role' },
+  { id: 3, title: 'Nama Role' },
 ];
 
 const tableOptions = {
@@ -189,15 +182,25 @@ const tableOptions = {
 };
 
 DataTable.use(DataTablesCore);
+const tableKaryawanOptions = {
+  select: {
+    selector: 'td:first-child',
+  },
+};
 
-const typeOptions = [{ label: 'Master' }, { label: 'Transaction' }];
+const tableHeader = [
+  { id: 1, title: 'NIK' },
+  { id: 2, title: 'Nama' },
+  { id: 3, title: 'Alamat' },
+  { id: 4, title: null },
+];
 
-const moduleOptions = [
-  { label: 'SETUP' },
-  { label: 'MARKETING' },
-  { label: 'PURCHASING' },
-  { label: 'ACCOUNTING' },
-  { label: 'HRIS' },
+const columns = [{ data: 'nik' }, { data: 'nama' }, { data: 'alamat_d' }, { data: 'id' }];
+
+const typeOptions = [
+  { id: 1, label: 'SUPER ADMIN' },
+  { id: 2, label: 'ADMIN' },
+  { id: 3, label: 'USER' },
 ];
 
 const statusOptions = [
@@ -206,11 +209,12 @@ const statusOptions = [
 ];
 
 const form = reactive({
-  kode: '',
+  nik: null,
   nama: '',
-  module: moduleOptions[2],
-  type: typeOptions[0],
+  usertype: typeOptions[2],
   status: statusOptions[0],
+  password: '',
+  catatan: '',
 });
 
 watch(
