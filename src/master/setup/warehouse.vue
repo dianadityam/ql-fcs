@@ -35,10 +35,8 @@ const tableOptions = {
 const tableHeader = [
   { id: 1, title: 'No.' },
   { id: 2, title: 'Kode' },
-  { id: 3, title: 'Deskripsi' },
-  { id: 4, title: 'Group' },
-  { id: 5, title: 'Status' },
-  { id: 6, title: 'Created' },
+  { id: 3, title: 'Nama' },
+  { id: 4, title: 'Catatan' },
 ];
 
 const warehouse = ref(null);
@@ -46,10 +44,8 @@ const warehouse = ref(null);
 const columns = [
   { width: '5%', data: 'id' },
   { data: 'kode' },
-  { data: 'deskripsi' },
-  { data: 'group' },
-  { data: 'is_active' },
-  { data: 'created_at' },
+  { data: 'nama' },
+  { data: 'catatan' },
 ];
 
 const fetchData = async () => {
