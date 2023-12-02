@@ -9,7 +9,7 @@
           <InputField label="Kode" required>
             <Input v-model="form.kode" :options="userOptions" />
           </InputField>
-          <InputField label="Deskripsi">
+          <InputField label="Deskripsi" required>
             <Input v-model="form.deskripsi" type="textarea" :options="warehouseOptions" />
           </InputField>
           <InputField label="Group">
@@ -30,7 +30,7 @@
               label="Save"
               @click="onSubmit"
               :class="{ 'opacity-25': form.processing }"
-              :disabled="form.processing"
+              :disabled="form.processing || !isFormValid"
               small
             />
             <router-link to="/master/general">
@@ -54,7 +54,7 @@
 <script setup>
 import service from '@/services';
 import Button from '@/components/Button.vue';
-import { reactive, watch } from 'vue';
+import { reactive, watch, computed } from 'vue';
 
 const onSubmit = () => {
   const dataToSubmit = {
@@ -86,6 +86,10 @@ const form = reactive({
   deskripsi: '',
   group: groupOptions[0],
   status: statusOptions[0],
+});
+
+const isFormValid = computed(() => {
+  return form.kode.trim() !== '' && form.deskripsi.trim() !== '';
 });
 
 // watch(
