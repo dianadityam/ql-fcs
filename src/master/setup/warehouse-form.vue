@@ -37,7 +37,7 @@
               type="submit"
               color="white"
               label="Cancel"
-              @click="onSubmit"
+              @click="$router.push('/master/warehouse')"
               class="ml-2"
               :class="{ 'opacity-25': form.processing }"
               :disabled="form.processing"
