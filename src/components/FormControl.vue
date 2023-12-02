@@ -24,6 +24,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  label: {
+    type: String,
+    default: null,
+  },
   inputmode: {
     type: String,
     default: null,
@@ -167,13 +171,10 @@ if (props.ctrlKFocus) {
       :required="required"
     />
 
-    <input
-      type="checkbox"
-      v-else-if="computedType === 'checkbox'"
-      :id="id"
-      v-model="computedValue"
-      :name="name"
-    />
+    <div v-else-if="computedType === 'checkbox'">
+      <input type="checkbox" :id="id" v-model="computedValue" :name="name" :label="label" />
+      <label class="font-bold text-sm ml-3">{{ label }}</label>
+    </div>
 
     <input
       v-else
