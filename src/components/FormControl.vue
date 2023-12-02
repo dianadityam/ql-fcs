@@ -62,8 +62,8 @@ const computedValue = computed({
 const inputElClass = computed(() => {
   const base = [
     'px-2 max-w-full focus:ring focus:outline-none border-[#CCCCCC] rounded-sm text-sm',
-    computedType.value === 'select' ? 'px-2' : 'py-2 w-full',
-    computedType.value === 'textarea' ? 'h-22' : 'h-7',
+    computedType.value === 'select' ? 'px-2 custom-select' : 'py-2 w-full',
+    computedType.value === 'textarea' ? 'h-22' : 'h-8',
     props.borderless ? 'border-0' : 'border',
     props.transparent ? 'bg-transparent' : 'bg-white',
   ];
@@ -151,6 +151,16 @@ if (props.ctrlKFocus) {
       v-else-if="computedType === 'date'"
       :id="id"
       v-model="computedValue"
+      :class="inputElClass"
+      :name="name"
+      :placeholder="placeholder"
+      :required="required"
+    />
+
+    <input
+      type="file"
+      v-else-if="computedType === 'file'"
+      :id="id"
       :class="inputElClass"
       :name="name"
       :placeholder="placeholder"
