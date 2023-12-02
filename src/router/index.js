@@ -12,9 +12,14 @@ const routes = [
     component: () => import('../views/setup.vue'),
   },
   {
+    path: '/form/karyawan',
+    name: 'form karyawan',
+    component: () => import('../master/setup/form-karyawan.vue'),
+  },
+  {
     path: '/master/karyawan',
     name: 'karyawan',
-    component: () => import('../views/karyawan.vue'),
+    component: () => import('../master/setup/karyawan.vue'),
   },
   {
     path: '/master/profile',
