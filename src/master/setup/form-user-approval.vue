@@ -22,13 +22,44 @@
             <Input v-model="form.status" type="select" :options="statusOptions" />
           </InputField>
           <InputField label="Level Type">
-            <Input v-model="form.levelType" type="select" :options="levelTypeOptions" disabled />
+            <input
+              type="text"
+              v-model="form.levelType"
+              class="bg-[#D2D6DE] w-1/2 px-3 text-sm"
+              disabled
+            />
           </InputField>
           <InputField label="Catatan Header">
             <Input v-model="form.catatan" type="textarea" />
           </InputField>
         </div>
-        <Button color="success" @click="onSubmit" label="Submit" small />
+        <div class="flex justify-between border-t-2 py-3">
+          <div>
+            <p>Created by</p>
+          </div>
+          <div>
+            <Button
+              type="submit"
+              color="success"
+              label="Save"
+              @click="onSubmit"
+              :class="{ 'opacity-25': form.processing }"
+              :disabled="form.processing"
+              small
+            />
+            <router-link to="/master/user-approval">
+              <Button
+                type="submit"
+                color="white"
+                label="Cancel"
+                class="ml-2"
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                small
+              />
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </LayoutMain>
@@ -42,7 +73,13 @@ import { reactive, watch } from 'vue';
 
 const onSubmit = () => {
   const dataToSubmit = {
-    ...form,
+    user_id: form.user_id.label,
+    warehouse: form.warehouse.label,
+    level: form.level.label,
+    table_name: form.tableName.label,
+    status: form.status.is_active,
+    leveltype: form.levelType,
+    note: form.catatan,
   };
   console.log(dataToSubmit);
   service({
@@ -71,8 +108,8 @@ const tableNameOptions = [
 ];
 
 const statusOptions = [
-  { id: 1, label: 'AKTIF' },
-  { id: 2, label: 'INAKTIF' },
+  { is_active: 0, label: 'INAKTIF' },
+  { is_active: 1, label: 'AKTIF' },
 ];
 
 const levelOptions = [
@@ -81,39 +118,25 @@ const levelOptions = [
   { id: 3, label: 'Level 3' },
 ];
 
-const levelTypeOptions = [
-  { id: 1, label: 'Process' },
-  { id: 2, label: 'Final' },
-];
-
 const form = reactive({
   user_id: userOptions[0],
   warehouse: warehouseOptions[0],
   level: levelOptions[0],
   tableName: tableNameOptions[0],
   status: statusOptions[0],
-  levelType: levelOptions[2] ? levelTypeOptions[1] : levelTypeOptions[0],
+  levelType: 'Proccess',
   catatan: '',
 });
 
-// watch(
-//   () => form.sesuai_ktp,
-//   (newValue) => {
-//     if (newValue) {
-//       form.alamat_d = form.alamat_ktp;
-//       form.rt_rw_d = form.rt_rw_ktp;
-//       form.provinsi_d = form.provinsi_ktp;
-//       form.kota_d = form.kota_ktp;
-//       form.kecamatan_d = form.kecamatan_ktp;
-//     } else {
-//       form.alamat_d = '';
-//       form.rt_rw_d = '';
-//       form.provinsi_d = '';
-//       form.kota_d = '';
-//       form.kecamatan_d = '';
-//     }
-//   }
-// );
+watch(
+  () => form.level,
+  (newValue) => {
+    console.log(newValue);
+    if (newValue.label === 'Level 3') {
+      form.levelType = 'Final';
+    } else {
+      form.levelType = 'Process';
+    }
+  }
+);
 </script>
-
-<style></style>

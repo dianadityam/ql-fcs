@@ -106,6 +106,16 @@ const routes = [
     name: 'warehouse form',
     component: () => import('../master/setup/warehouse-form.vue'),
   },
+  {
+    path: '/master/customer',
+    name: 'customer',
+    component: () => import('../master/marketing/customer.vue'),
+  },
+  {
+    path: '/form/customer',
+    name: 'customer form',
+    component: () => import('../master/marketing/customer-form.vue'),
+  },
 ];
 
 const router = createRouter({
