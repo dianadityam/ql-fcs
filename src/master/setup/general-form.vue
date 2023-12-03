@@ -91,25 +91,4 @@ const form = reactive({
 const isFormValid = computed(() => {
   return form.kode.trim() !== '' && form.deskripsi.trim() !== '';
 });
-
-// watch(
-//   () => form.sesuai_ktp,
-//   (newValue) => {
-//     if (newValue) {
-//       form.alamat_d = form.alamat_ktp;
-//       form.rt_rw_d = form.rt_rw_ktp;
-//       form.provinsi_d = form.provinsi_ktp;
-//       form.kota_d = form.kota_ktp;
-//       form.kecamatan_d = form.kecamatan_ktp;
-//     } else {
-//       form.alamat_d = '';
-//       form.rt_rw_d = '';
-//       form.provinsi_d = '';
-//       form.kota_d = '';
-//       form.kecamatan_d = '';
-//     }
-//   }
-// );
 </script>
-
-<style></style>
