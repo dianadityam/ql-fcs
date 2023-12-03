@@ -14,6 +14,9 @@ defineProps({
     type: String,
     default: null,
   },
+  required: {
+    type: Boolean,
+  },
 });
 
 const slots = useSlots();
@@ -36,7 +39,9 @@ const wrapperClass = computed(() => {
 
 <template>
   <div class="mb-6 last:mb-0 form-grid">
-    <label v-if="label" :for="labelFor" class="font-bold text-sm">{{ label }}</label>
+    <label v-if="label" :for="labelFor" class="font-bold text-sm"
+      >{{ label }}<span v-if="required" class="text-red-500">*</span></label
+    >
     <div :class="wrapperClass">
       <slot />
     </div>

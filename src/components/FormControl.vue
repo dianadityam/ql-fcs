@@ -24,6 +24,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  label: {
+    type: String,
+    default: null,
+  },
   inputmode: {
     type: String,
     default: null,
@@ -62,8 +66,8 @@ const computedValue = computed({
 const inputElClass = computed(() => {
   const base = [
     'px-2 max-w-full focus:ring focus:outline-none border-[#CCCCCC] rounded-sm text-sm',
-    computedType.value === 'select' ? 'px-2' : 'py-2 w-full',
-    computedType.value === 'textarea' ? 'h-22' : 'h-7',
+    computedType.value === 'select' ? 'px-2 custom-select' : 'py-2 w-full',
+    computedType.value === 'textarea' ? 'h-22' : 'h-8',
     props.borderless ? 'border-0' : 'border',
     props.transparent ? 'bg-transparent' : 'bg-white',
   ];
@@ -158,12 +162,19 @@ if (props.ctrlKFocus) {
     />
 
     <input
-      type="checkbox"
-      v-else-if="computedType === 'checkbox'"
+      type="file"
+      v-else-if="computedType === 'file'"
       :id="id"
-      v-model="computedValue"
+      :class="inputElClass"
       :name="name"
+      :placeholder="placeholder"
+      :required="required"
     />
+
+    <div v-else-if="computedType === 'checkbox'">
+      <input type="checkbox" :id="id" v-model="computedValue" :name="name" :label="label" />
+      <label class="font-bold text-sm ml-3">{{ label }}</label>
+    </div>
 
     <input
       v-else

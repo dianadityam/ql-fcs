@@ -4,7 +4,7 @@
 
 body {
   background-color: #f4f4f4 !important;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
@@ -23,7 +23,13 @@ p {
   display: grid;
   grid-template-columns: 100px 1fr;
   gap: 10px;
-  margin: 10px 20px 10px 0;
+  margin: 7px 20px 7px 0;
+}
+
+.custom-select {
+  border: 0;
+  border-right: 16px solid transparent;
+  outline: 1px solid #cccccc;
 }
 
 .aside {

@@ -1,18 +1,17 @@
 <template>
   <LayoutMain>
     <div class="px-9 min-h-screen">
-      <h1>Profile List</h1>
+      <h1>Role List</h1>
       <div class="content-section">
-        <router-link to="/profile/form">
-          <Button class="mb-4" color="info" outline label="Create New" small />
+        <router-link to="/form/karyawan">
+          <Button class="py-2" color="info" outline label="Create New" small />
         </router-link>
         <div class="my-5">
           <TableData
-            :data="user"
+            :data="karyawan"
             :columns="columns"
             :tableHeader="tableHeader"
             :tableOptions="tableOptions"
-            checkable
           />
         </div>
       </div>
@@ -21,11 +20,11 @@
 </template>
 
 <script setup>
-import LayoutMain from '../layouts/LayoutMain.vue';
+import LayoutMain from '@/layouts/LayoutMain.vue';
 import TableData from '@/components/TableData.vue';
 import Button from '@/components/Button.vue';
 import { ref, onMounted } from 'vue';
-import service from '../services';
+import service from '@/services';
 
 const tableOptions = {
   responsive: true,
@@ -34,33 +33,35 @@ const tableOptions = {
 
 const tableHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'User Log in' },
-  { id: 3, title: 'Nama' },
-  { id: 4, title: 'Tipe User' },
-  { id: 5, title: 'Status' },
-  { id: 6, title: 'Created' },
+  { id: 2, title: 'Nama Karyawan' },
+  { id: 3, title: 'No. ID' },
+  { id: 4, title: 'Divisi' },
+  { id: 5, title: 'Tanggal Masuk' },
+  { id: 6, title: 'Catatan' },
+  { id: 7, title: 'Status' },
 ];
 
-const user = ref(null);
+const karyawan = ref(null);
 
 const columns = [
-  { data: null, render: (data, type, row, meta) => meta.row + 1 },
-  { data: 'email' },
-  { data: 'username' },
-  { data: 'usertype' },
-  { data: 'status' },
-  { data: 'created_at' },
+  { width: '5%', data: 'id' },
+  { data: 'nama' },
+  { data: 'nid' },
+  { data: 'divisi' },
+  { data: 'tgl_masuk' },
+  { data: 'catatan' },
+  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
 ];
 
 const fetchData = async () => {
   const result = await service({
     method: 'GET',
-    url: 'operation/default_users?paginate=100',
+    url: 'operation/m_karyawan',
     token: true,
   });
   if (result.status === 200) {
-    user.value = result.response.data;
-    // console.log(user);
+    karyawan.value = result.response.data;
+    console.log(karyawan);
   }
 };
 

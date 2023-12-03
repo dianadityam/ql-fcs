@@ -1,0 +1,89 @@
+<template>
+  <LayoutMain>
+    <div class="px-9">
+      <h1>Form Warehouse</h1>
+      <div class="content-section">
+        <strong>Warehouse Header</strong>
+        <p class="font-bold text-red-600 mt-5">New Data</p>
+        <div class="grid my-5 grid-cols-2">
+          <InputField label="Kode" required>
+            <Input v-model="form.kode" :options="userOptions" />
+          </InputField>
+          <InputField label="Nama" required>
+            <Input v-model="form.nama" />
+          </InputField>
+          <InputField label="Catatan">
+            <Input v-model="form.catatan" type="textarea" />
+          </InputField>
+          <InputField label="Status">
+            <Input v-model="form.status" type="select" :options="statusOptions" />
+          </InputField>
+        </div>
+        <div class="flex justify-between border-t-2 py-3">
+          <div>
+            <p>Created by</p>
+          </div>
+          <div>
+            <Button
+              type="submit"
+              color="success"
+              label="Save"
+              @click="onSubmit"
+              :class="{ 'opacity-25': form.processing }"
+              :disabled="form.processing || !isFormValid"
+              small
+            />
+            <Button
+              type="submit"
+              color="white"
+              label="Cancel"
+              @click="$router.push('/master/warehouse')"
+              class="ml-2"
+              :class="{ 'opacity-25': form.processing }"
+              :disabled="form.processing"
+              small
+              outline
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </LayoutMain>
+</template>
+
+<script setup>
+import LayoutMain from '@/layouts/LayoutMain.vue';
+import service from '@/services';
+import Button from '@/components/Button.vue';
+import { reactive, computed } from 'vue';
+
+const onSubmit = () => {
+  const dataToSubmit = {
+    ...form,
+    is_active: form.status.id,
+  };
+  console.log(dataToSubmit);
+  service({
+    method: 'POST',
+    url: '/operation/m_warehouse',
+    token: true,
+    data: dataToSubmit,
+  });
+};
+
+const statusOptions = [
+  { id: 0, label: 'INAKTIF' },
+  { id: 1, label: 'AKTIF' },
+];
+
+const form = reactive({
+  kode: '',
+  nama: '',
+  catatan: '',
+  status: statusOptions[0],
+});
+
+const isFormValid = computed(() => {
+  return form.kode.trim() !== '' && form.nama.trim() !== '';
+});
+</script>

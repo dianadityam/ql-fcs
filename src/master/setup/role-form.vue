@@ -107,7 +107,7 @@ import FormControl from '@/components/FormControl.vue';
 import TableData from '@/components/TableData.vue';
 import Modal from '@/components/Modal.vue';
 import Button from '@/components/Button.vue';
-import service from '../services';
+import service from '@/services';
 import { reactive, ref, onMounted, watch } from 'vue';
 
 const selectedKaryawan = ref([]);

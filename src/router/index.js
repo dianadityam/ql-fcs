@@ -12,29 +12,34 @@ const routes = [
     component: () => import('../views/setup.vue'),
   },
   {
+    path: '/form/karyawan',
+    name: 'form karyawan',
+    component: () => import('../master/setup/form-karyawan.vue'),
+  },
+  {
     path: '/master/karyawan',
     name: 'karyawan',
-    component: () => import('../views/karyawan.vue'),
+    component: () => import('../master/setup/karyawan.vue'),
   },
   {
     path: '/master/profile',
     name: 'profile',
-    component: () => import('../views/profile.vue'),
+    component: () => import('../master/setup/profile.vue'),
   },
   {
     path: '/master/role',
     name: 'role',
-    component: () => import('../views/RoleMaster.vue'),
+    component: () => import('../master/setup/role.vue'),
   },
   {
     path: '/role/form',
     name: 'role form',
-    component: () => import('../views/RoleForm.vue'),
+    component: () => import('../master/setup/role-form.vue'),
   },
   {
     path: '/profile/form',
     name: 'create profile',
-    component: () => import('../views/createProfile.vue'),
+    component: () => import('../master/setup/profile-form.vue'),
   },
   {
     path: '/marketing',
@@ -70,6 +75,46 @@ const routes = [
     path: '/master/pricelist-supplier',
     name: 'hris',
     component: () => import('../master/purchasing/pricelist-supplier.vue'),
+  },
+  {
+    path: '/master/user-approval',
+    name: 'user approval',
+    component: () => import('../master/setup/user-approval.vue'),
+  },
+  {
+    path: '/form/user-approval',
+    name: 'user approval form',
+    component: () => import('../master/setup/form-user-approval.vue'),
+  },
+  {
+    path: '/master/general',
+    name: 'general',
+    component: () => import('../master/setup/general.vue'),
+  },
+  {
+    path: '/form/general',
+    name: 'general form',
+    component: () => import('../master/setup/general-form.vue'),
+  },
+  {
+    path: '/master/warehouse',
+    name: 'warehouse',
+    component: () => import('../master/setup/warehouse.vue'),
+  },
+  {
+    path: '/form/warehouse',
+    name: 'warehouse form',
+    component: () => import('../master/setup/warehouse-form.vue'),
+  },
+  {
+    path: '/master/customer',
+    name: 'customer',
+    component: () => import('../master/marketing/customer.vue'),
+  },
+  {
+    path: '/form/customer',
+    name: 'customer form',
+    component: () => import('../master/marketing/customer-form.vue'),
   },
 ];
 

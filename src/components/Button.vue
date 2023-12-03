@@ -87,6 +87,7 @@ const componentClass = computed(() => {
     'border',
     props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
     props.roundedFull ? 'rounded-full' : 'rounded',
+    props.small && !props.outline ? 'font-bold' : '',
     getButtonColor(props.color, props.outline, !props.disabled, props.active),
   ];
 
