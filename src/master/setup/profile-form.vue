@@ -100,7 +100,6 @@
         >
           <thead>
             <tr>
-              <th v-if="checkable" />
               <th v-for="item in tableHeader" :key="item.id">{{ item.title }}</th>
             </tr>
           </thead>
@@ -112,6 +111,23 @@
             </tr>
           </tbody>
         </DataTable>
+      </template>
+      <template #footer>Custom content</template>
+    </Modal>
+    <Modal
+      :showModal="isShowDetail"
+      @toggle-modal="showDetailModal"
+      @submit="setData"
+      submitLabel="Pilih"
+    >
+      <template #header>Custom header</template>
+      <template #content>
+        <TableData
+          :data="user"
+          :columns="columns"
+          :tableHeader="tableHeader"
+          :tableOptions="tableOptions"
+        />
       </template>
       <template #footer>Custom content</template>
     </Modal>

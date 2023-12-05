@@ -60,39 +60,6 @@
         </div>
       </div>
     </div>
-    <!-- <Modal
-      :showModal="isShowKaryawan"
-      @toggle-modal="showKaryawanModal"
-      @submit="setData"
-      submitLabel="Pilih Karyawan"
-    >
-      <template #header>Custom header</template>
-      <template #content>
-        <DataTable
-          :data="dataKaryawan"
-          :columns="columns"
-          :table-header="tableHeader"
-          :options="tableKaryawanOptions"
-          class="stripe pageResize"
-          ref="table"
-        >
-          <thead>
-            <tr>
-              <th v-if="checkable" />
-              <th v-for="item in tableHeader" :key="item.id">{{ item.title }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in data" :key="item.id">
-              <td>
-                {{ item }}
-              </td>
-            </tr>
-          </tbody>
-        </DataTable>
-      </template>
-      <template #footer>Custom content</template>
-    </Modal> -->
   </LayoutMain>
 </template>
 
@@ -157,13 +124,6 @@ const handleAddDetail = () => {
   });
   console.log(roleDetail);
 };
-
-// function setData() {
-//   table.value.dt.rows({ selected: true }).every(function () {
-//     selectedKaryawan.value.push(this.data());
-//     isShowKaryawan.value = false;
-//   });
-// }
 
 const detailListHeader = [
   { id: 1, title: 'No.' },

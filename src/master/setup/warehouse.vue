@@ -12,7 +12,6 @@
             :columns="columns"
             :tableHeader="tableHeader"
             :tableOptions="tableOptions"
-            checkable
           />
         </div>
       </div>
