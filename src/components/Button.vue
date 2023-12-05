@@ -94,7 +94,7 @@ const componentClass = computed(() => {
   if (!props.label && props.icon) {
     base.push('p-1');
   } else if (props.small) {
-    base.push('text-sm', props.roundedFull ? 'px-3 py-1' : 'p-1');
+    base.push('text-xs', props.roundedFull ? 'px-3 py-1' : 'px-1 py-2');
   } else {
     base.push('py-2', props.roundedFull ? 'px-6' : 'px-3');
   }

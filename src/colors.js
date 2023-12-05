@@ -63,7 +63,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
       success: 'bg-[#4CAE4C] text-white',
       danger: 'bg-red-600 dark:bg-red-500 text-white',
       warning: 'bg-yellow-600 dark:bg-yellow-500 text-white',
-      info: 'bg-blue-600 dark:bg-blue-500 text-white',
+      info: 'bg-[#367FA9] text-white',
     },
     bgHover: {
       white: 'hover:bg-gray-100',
@@ -76,7 +76,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
         'hover:bg-red-700 hover:border-red-700 hover:dark:bg-red-600 hover:dark:border-red-600',
       warning:
         'hover:bg-yellow-700 hover:border-yellow-700 hover:dark:bg-yellow-600 hover:dark:border-yellow-600',
-      info: 'hover:bg-blue-700 hover:border-blue-700 hover:dark:bg-blue-600 hover:dark:border-blue-600',
+      info: 'hover:bg-[#428BCA] hover:border-blue-700 ',
     },
     borders: {
       white: 'border-[#DDDDDD]',
