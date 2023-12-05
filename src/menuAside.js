@@ -66,11 +66,23 @@ const menu = ref([
       },
     ],
   },
-  // {
-  //   to: '/marketing',
-  //   label: 'MARKETING',
-  //   icon: mdiBagChecked,
-  // },
+  {
+    label: 'MARKETING',
+    icon: mdiBagChecked,
+    toggle: false,
+    menu: [
+      {
+        label: 'MASTER',
+        toggle: false,
+        menu: [
+          {
+            label: 'CUSTOMER',
+            to: '/master/customer',
+          },
+        ],
+      },
+    ],
+  },
   // {
   //   to: '/purchasing',
   //   label: 'PURCHASING',
