@@ -7,6 +7,11 @@ const routes = [
     component: () => import('../views/notification.vue'),
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login.vue'),
+  },
+  {
     path: '/setup',
     name: 'setup',
     component: () => import('../views/setup.vue'),
@@ -115,6 +120,36 @@ const routes = [
     path: '/form/customer',
     name: 'customer form',
     component: () => import('../master/marketing/customer-form.vue'),
+  },
+  {
+    path: '/master/kendaraan',
+    name: 'kendaraan',
+    component: () => import('../master/marketing/kendaraan.vue'),
+  },
+  {
+    path: '/form/kendaraan',
+    name: 'kendaraan form',
+    component: () => import('../master/marketing/kendaraan-form.vue'),
+  },
+  {
+    path: '/master/spv',
+    name: 'spv',
+    component: () => import('../master/marketing/spv.vue'),
+  },
+  {
+    path: '/form/spv',
+    name: 'spv form',
+    component: () => import('../master/marketing/spv-form.vue'),
+  },
+  {
+    path: '/master/ekspedisi',
+    name: 'ekspedisi',
+    component: () => import('../master/marketing/ekspedisi.vue'),
+  },
+  {
+    path: '/form/ekspedisi',
+    name: 'ekspedisi form',
+    component: () => import('../master/marketing/ekspedisi-form.vue'),
   },
 ];
 

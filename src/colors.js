@@ -37,7 +37,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
   const colors = {
     ring: {
       white: 'ring-gray-200 dark:ring-gray-500',
-      whiteDark: 'ring-gray-200 dark:ring-gray-500',
+      primaryBlue: 'ring-gray-200 dark:ring-gray-500',
       lightDark: 'ring-gray-200 dark:ring-gray-500',
       contrast: 'ring-gray-300 dark:ring-gray-400',
       success: 'ring-emerald-300 dark:ring-emerald-700',
@@ -47,7 +47,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
     active: {
       white: 'bg-gray-100',
-      whiteDark: 'bg-gray-100 dark:bg-slate-800',
+      primaryBlue: 'bg-gray-100 dark:bg-slate-800',
       lightDark: 'bg-gray-200 dark:bg-slate-700',
       contrast: 'bg-gray-700 dark:bg-slate-100',
       success: 'bg-emerald-700 dark:bg-emerald-600',
@@ -57,7 +57,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
     bg: {
       white: 'bg-[#F4F4F4] text-black',
-      whiteDark: 'bg-white text-black dark:bg-slate-900 dark:text-white',
+      primaryBlue: 'bg-[#2F80ED] text-black',
       lightDark: 'bg-gray-100 text-black dark:bg-slate-800 dark:text-white',
       contrast: 'bg-gray-800 text-white dark:bg-white dark:text-black',
       success: 'bg-[#4CAE4C] text-white',
@@ -67,7 +67,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
     bgHover: {
       white: 'hover:bg-gray-100',
-      whiteDark: 'hover:bg-gray-100 hover:dark:bg-slate-800',
+      primaryBlue: 'hover:bg-[#2a73d5]',
       lightDark: 'hover:bg-gray-200 hover:dark:bg-slate-700',
       contrast: 'hover:bg-gray-700 hover:dark:bg-slate-100',
       success:
@@ -80,7 +80,7 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
     borders: {
       white: 'border-[#DDDDDD]',
-      whiteDark: 'border-white dark:border-slate-900',
+      primaryBlue: 'border-[#2F80ED]',
       lightDark: 'border-gray-100 dark:border-slate-800',
       contrast: 'border-gray-800 dark:border-white',
       success: 'border-[#5CB85D]',

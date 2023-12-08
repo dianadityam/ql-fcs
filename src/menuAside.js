@@ -79,6 +79,18 @@ const menu = ref([
             label: 'CUSTOMER',
             to: '/master/customer',
           },
+          {
+            label: 'KENDARAAN',
+            to: '/master/kendaraan',
+          },
+          {
+            label: 'SPV',
+            to: '/master/spv',
+          },
+          {
+            label: 'EKSPEDISI',
+            to: '/master/ekspedisi',
+          },
         ],
       },
     ],
