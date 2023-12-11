@@ -63,6 +63,13 @@ const computedValue = computed({
   },
 });
 
+const numbersOnly = (evt) => {
+  const charCode = evt.which ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || (charCode > 57 && charCode !== 46))) {
+    evt.preventDefault();
+  }
+};
+
 const inputElClass = computed(() => {
   const base = [
     'px-2 max-w-full focus:ring focus:outline-none border-[#CCCCCC] rounded-sm text-sm',
@@ -162,11 +169,12 @@ if (props.ctrlKFocus) {
     />
 
     <input
-      type="file"
-      v-else-if="computedType === 'file'"
+      v-else-if="computedType === 'numbers'"
       :id="id"
       :class="inputElClass"
       :name="name"
+      v-model="computedValue"
+      @keypress="numbersOnly"
       :placeholder="placeholder"
       :required="required"
     />
