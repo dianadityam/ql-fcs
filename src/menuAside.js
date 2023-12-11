@@ -91,6 +91,10 @@ const menu = ref([
             label: 'EKSPEDISI',
             to: '/master/ekspedisi',
           },
+          {
+            label: 'PRICELIST',
+            to: '/master/pricelist',
+          },
         ],
       },
     ],
