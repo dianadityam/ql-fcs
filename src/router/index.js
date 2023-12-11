@@ -168,4 +168,13 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('authToken');
+  if (token || to.path === '/login') {
+    next();
+  } else {
+    next('/login');
+  }
+});
+
 export default router;
