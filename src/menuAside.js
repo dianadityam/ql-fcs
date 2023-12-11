@@ -7,6 +7,7 @@ import {
   mdiWrench,
   mdiViewList,
   mdiCart,
+  mdiAccountGroup,
   mdiDatabase,
   mdiScaleBalance,
 } from '@mdi/js';
@@ -51,10 +52,6 @@ const menu = ref([
             to: '/master/warehouse',
           },
           {
-            label: 'KARYAWAN',
-            to: '/master/karyawan',
-          },
-          {
             label: 'MERK',
             to: '/master/merk',
           },
@@ -68,7 +65,7 @@ const menu = ref([
   },
   {
     label: 'MARKETING',
-    icon: mdiBagChecked,
+    icon: mdiCart,
     toggle: false,
     menu: [
       {
@@ -119,11 +116,23 @@ const menu = ref([
   //   label: 'FIXED ASSET',
   //   icon: mdiAccountCircle,
   // },
-  // {
-  //   to: '/hris',
-  //   label: 'HRIS',
-  //   icon: mdiAlertCircle,
-  // },
+  {
+    to: '/hris',
+    label: 'HRIS',
+    icon: mdiAccountGroup,
+    menu: [
+      {
+        label: 'MASTER',
+        toggle: false,
+        menu: [
+          {
+            label: 'KARYAWAN',
+            to: '/master/karyawan',
+          },
+        ],
+      },
+    ],
+  },
   // {
   //   label: 'Dropdown',
   //   icon: mdiViewList,
