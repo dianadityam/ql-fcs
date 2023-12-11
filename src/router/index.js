@@ -151,6 +151,16 @@ const routes = [
     name: 'ekspedisi form',
     component: () => import('../master/marketing/ekspedisi-form.vue'),
   },
+  {
+    path: '/master/pricelist',
+    name: 'pricelist',
+    component: () => import('../master/marketing/pricelist.vue'),
+  },
+  {
+    path: '/form/pricelist',
+    name: 'pricelist form',
+    component: () => import('../master/marketing/pricelist-form.vue'),
+  },
 ];
 
 const router = createRouter({
