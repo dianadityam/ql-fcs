@@ -102,7 +102,7 @@ const columns = [
   {
     data: null,
     className: 'delete-button cursor-pointer',
-    defaultContent: '<p>X</p>',
+    defaultContent: '<i class="fa-solid fa-xmark"></i>',
     orderable: false,
   },
 ];

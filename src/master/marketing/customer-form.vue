@@ -17,7 +17,7 @@
             <Input v-model="form.last_name" />
           </InputField>
           <InputField label="Cara Bayar" required>
-            <Input v-model="form.payment" :options="paymentOptions" />
+            <Input v-model="form.cara_bayar" :options="paymentOptions" />
           </InputField>
           <InputField label="ToP" required>
             <Input v-model="form.ToP" />
@@ -182,17 +182,17 @@
               label="Save"
               @click="onSubmit"
               :class="{ 'opacity-25': form.processing }"
-              :disabled="form.processing || !isFormValid"
+              :disabled="form.processing"
               small
             />
-            <Button
+            <!-- <Button
               type="submit"
               color="success"
               label="TeST"
               @click="handleConsole"
               :class="{ 'opacity-25': form.processing }"
               small
-            />
+            /> -->
             <router-link to="/master/customer">
               <Button
                 type="submit"
@@ -253,9 +253,12 @@ const onSubmit = () => {
   form.processing = true;
   const dataToSubmit = {
     ...form,
-    agama: form.agama.label,
-    jenis_kelamin: form.jenis_kelamin.label,
+    nama: `${form.first_name} ${form.last_name}`,
     is_active: form.status.id,
+    pkp: form.pkp.label,
+    cara_bayar: form.cara_bayar.label,
+    customer_type: form.customer_type.label,
+    customer_type_area: form.customer_type_area.label,
   };
   console.log(dataToSubmit);
   service({
@@ -298,10 +301,10 @@ const form = reactive({
   pkp: pkpOptions[0],
   first_name: '',
   last_name: '',
-  payment: paymentOptions[0],
+  cara_bayar: paymentOptions[0],
   ToP: '',
-  customer_type1: customerTypeOptions1[0],
-  customer_type2: customerTypeOptions2[0],
+  customer_type_area: customerTypeOptions1[0],
+  customer_type: customerTypeOptions2[0],
   credit_limit: '',
   toleransi_top: '',
   sisa_kredit_limit: '',
@@ -329,9 +332,9 @@ const form = reactive({
   longitude: '',
   status: statusOptions[1],
   catatan: '',
-  npwp: npwpList.value,
-  bankDetail: bankDetail.value,
-  alamatDetail: alamatDetail.value,
+  m_customer_det_npwp: npwpList.value,
+  m_customer_det_bank: bankDetail.value,
+  m_customer_det_almt: alamatDetail.value,
 });
 
 const handleConsole = () => {

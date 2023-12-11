@@ -4,13 +4,19 @@
       <Input v-model="form.nama_lokasi" placeholder="C0001" />
     </InputField>
     <InputField label="Area Delivery" required>
-      <Input v-model="form.area" />
+      <Input v-model="form.delivery_area" />
     </InputField>
     <InputField label="Alamat">
       <Input v-model="form.alamat" />
     </InputField>
     <InputField label="Provinsi" required>
       <Input v-model="form.provinsi" />
+    </InputField>
+    <InputField label="Kota" required>
+      <Input v-model="form.kota" />
+    </InputField>
+    <InputField label="Kecamatan" required>
+      <Input v-model="form.kecamatan" />
     </InputField>
   </div>
   <div class="mt-5">
@@ -73,22 +79,25 @@ onMounted(() => {
 });
 const handleAddDetail = () => {
   const listData = {
-    nama_lokasi: form.nama_lokasi,
-    area: form.area,
-    provinsi: form.provinsi,
-    alamat: form.alamat,
+    // nama_lokasi: form.nama_lokasi,
+    // delivery_area: form.delivery_area,
+    // provinsi: form.provinsi,
+    // alamat: form.alamat,
+    ...form,
   };
   emit('update:alamat', listData);
   form.nama_lokasi = '';
-  form.area = '';
+  form.delivery_area = '';
   form.provinsi = '';
   form.alamat = '';
+  form.kecamatan = '';
+  form.kota = '';
 };
 
 const tableHeader = [
   { id: 1, title: 'No.' },
   { id: 2, title: 'Nama Lokasi' },
-  { id: 3, title: 'Area' },
+  { id: 3, title: 'Kode Area' },
   { id: 4, title: 'Alamat' },
   { id: 5, title: 'Provinsi' },
   { id: 6, title: null },
@@ -96,7 +105,7 @@ const tableHeader = [
 const columns = [
   { data: null, render: (data, type, row, meta) => meta.row + 1 },
   { data: 'nama_lokasi' },
-  { data: 'area' },
+  { data: 'delivery_area' },
   { data: 'alamat' },
   { data: 'provinsi' },
   {
@@ -109,17 +118,21 @@ const columns = [
 
 const form = reactive({
   nama_lokasi: '',
-  area: '',
+  delivery_area: '',
   provinsi: '',
   alamat: '',
+  kota: '',
+  kecamatan: '',
 });
 
 const isFormValid = computed(() => {
   return (
     form.nama_lokasi.trim() !== '' &&
-    form.area.trim() !== '' &&
+    form.delivery_area.trim() !== '' &&
     form.provinsi.trim() !== '' &&
-    form.alamat.trim() !== ''
+    form.alamat.trim() !== '' &&
+    form.kecamatan.trim() !== '' &&
+    form.kota.trim() !== ''
   );
 });
 </script>

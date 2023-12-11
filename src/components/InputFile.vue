@@ -3,7 +3,7 @@
     <input type="file" class="file-input" />
   </div>
   <div>
-    <img src="/img-preview.svg" alt="" />
+    <img src="../assets/img-preview.svg" alt="" />
   </div>
 </template>
 <script></script>
