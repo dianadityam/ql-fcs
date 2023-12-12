@@ -40,10 +40,14 @@ const tableHeader = [
 const roles = ref(null);
 
 const columns = [
-  { width: '5%', data: null, render: (data, type, row, meta) => meta.row + 1 },
-  { data: 'kode' },
+  { width: '5%', data: 'id' },
+  {
+    data: 'kode',
+    render: (data, type, row, meta) =>
+      `<a class="text-blue-500 cursor-pointer" href="/role/form/${row.id}">${data}</a>`,
+  },
   { data: 'nama' },
-  { data: 'status' },
+  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
   { data: 'created_at' },
 ];
 
