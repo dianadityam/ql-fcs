@@ -4,7 +4,7 @@
       <h1>Form Customer</h1>
       <div class="content-section">
         <strong>Customer Header</strong>
-        <p class="font-bold text-red-600 mt-5">New Data</p>
+        <p v-if="!$route.params.id" class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 mt-5">
           <InputField label="Kode" required>
             <Input v-model="form.kode" placeholder="C0001" />
@@ -20,11 +20,11 @@
             <Input v-model="form.cara_bayar" :options="paymentOptions" />
           </InputField>
           <InputField label="ToP" required>
-            <Input v-model="form.ToP" />
+            <Input v-model="form.top" />
           </InputField>
           <InputField label="Tipe Customer" required>
-            <Input v-model="form.customer_type1" :options="customerTypeOptions1" />
-            <Input v-model="form.customer_type2" :options="customerTypeOptions2" />
+            <Input v-model="form.customer_type_area" :options="customerTypeOptions1" />
+            <Input v-model="form.customer_type" :options="customerTypeOptions2" />
           </InputField>
           <InputField label="Credit Limit (IDR)">
             <Input v-model="form.credit_limit" />
@@ -221,11 +221,16 @@ import BankDetail from './customer-tab/bank.vue';
 import FavItem from './customer-tab/favourite.vue';
 import { reactive, watch, computed, ref } from 'vue';
 import { onMounted } from 'vue';
-import { mdiMagnify, mdiPlus } from '@mdi/js';
-import BaseIcon from '@/components/BaseIcon.vue';
-import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const activeTab = ref(1);
+const route = useRoute();
+
+onMounted(() => {
+  if (route.params.id) {
+    updateValue();
+  }
+});
 
 const changeTab = (tab) => {
   activeTab.value = tab;
@@ -254,45 +259,29 @@ const onSubmit = () => {
   const dataToSubmit = {
     ...form,
     nama: `${form.first_name} ${form.last_name}`,
-    is_active: form.status.id,
-    pkp: form.pkp.label,
-    cara_bayar: form.cara_bayar.label,
-    customer_type: form.customer_type.label,
-    customer_type_area: form.customer_type_area.label,
+    is_active: form.status.is_active,
   };
   console.log(dataToSubmit);
   service({
-    method: 'POST',
-    url: '/operation/m_customer',
+    method: route.params.id ? 'PUT' : 'POST',
+    url: route.params.id ? '/operation/m_customer/' + route.params.id : '/operation/m_customer',
     token: true,
     data: dataToSubmit,
   });
   form.processing = false;
 };
 
-const paymentOptions = [
-  { id: 1, label: 'TUNAI' },
-  { id: 2, label: 'TRANSFER' },
-];
+const paymentOptions = ['TUNAI', 'TRANSFER'];
 
-const customerTypeOptions1 = [
-  { id: 1, label: 'LOKAL' },
-  { id: 2, label: 'EKSTERNAL' },
-];
+const customerTypeOptions1 = ['LOKAL', 'EKSTERNAL'];
 
-const customerTypeOptions2 = [
-  { id: 1, label: 'AGEN' },
-  { id: 2, label: 'CUSTOMER' },
-];
+const customerTypeOptions2 = ['AGEN', 'CUSTOMER'];
 
-const pkpOptions = [
-  { id: 1, label: 'TIDAK' },
-  { id: 2, label: 'YA' },
-];
+const pkpOptions = ['TIDAK', 'YA'];
 
 const statusOptions = [
-  { id: 0, label: 'Inaktif' },
-  { id: 1, label: 'Aktif' },
+  { is_active: 0, label: 'Inaktif' },
+  { is_active: 1, label: 'Aktif' },
 ];
 
 const form = reactive({
@@ -302,7 +291,7 @@ const form = reactive({
   first_name: '',
   last_name: '',
   cara_bayar: paymentOptions[0],
-  ToP: '',
+  top: '',
   customer_type_area: customerTypeOptions1[0],
   customer_type: customerTypeOptions2[0],
   credit_limit: '',
@@ -337,9 +326,33 @@ const form = reactive({
   m_customer_det_almt: alamatDetail.value,
 });
 
-const handleConsole = () => {
-  console.log(form.npwp, 'Npwp');
-  console.log(form.bankDetail, 'bank');
+const updateValue = async () => {
+  const result = await service({
+    method: 'GET',
+    url: '/operation/m_customer/' + route.params.id,
+    token: true,
+  });
+  if (result.status === 200) {
+    const response = result.response.data;
+    const nameSplit = response.nama.split(' ');
+    form.first_name = nameSplit[0];
+    form.last_name = nameSplit[1];
+    npwpList.value = response.m_customer_det_npwp;
+    bankDetail.value = response.m_customer_det_bank;
+    alamatDetail.value = response.m_customer_det_almt;
+    fillForm(response);
+    form.pkp = pkpOptions.find((x) => x === response.pkp);
+    form.cara_bayar = paymentOptions.find((x) => x === response.cara_bayar);
+    form.customer_type = customerTypeOptions2.find((x) => x === response.customer_type);
+  }
+};
+
+const fillForm = (data) => {
+  for (const key in form) {
+    if (key in data) {
+      form[key] = data[key];
+    }
+  }
 };
 
 // const isFormValid = computed(() => {
@@ -360,13 +373,4 @@ const handleConsole = () => {
 //     form.phone.trim() !== ''
 //   );
 // });
-
-watch(
-  () => npwpList.value,
-  (newValue) => {
-    if (newValue) {
-      console.log(newValue);
-    }
-  }
-);
 </script>

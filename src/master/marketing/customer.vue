@@ -46,9 +46,13 @@ const user = ref(null);
 
 const columns = [
   { width: '5%', data: 'id' },
-  { data: 'kode' },
+  {
+    data: 'kode',
+    render: (data, type, row, meta) =>
+      `<a class="text-blue-500 cursor-pointer" href="/form/customer/${row.id}">${data}</a>`,
+  },
   { data: 'nama' },
-  { data: 'customer_type' },
+  { data: 'custormer_type' },
   { data: 'alamat' },
   { data: 'phone1' },
   { data: 'email' },
