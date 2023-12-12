@@ -19,12 +19,12 @@ const routes = [
   {
     path: '/form/karyawan',
     name: 'form karyawan',
-    component: () => import('../master/setup/form-karyawan.vue'),
+    component: () => import('../master/hris/form-karyawan.vue'),
   },
   {
     path: '/master/karyawan',
     name: 'karyawan',
-    component: () => import('../master/setup/karyawan.vue'),
+    component: () => import('../master/hris/karyawan.vue'),
   },
   {
     path: '/master/profile',
@@ -37,7 +37,7 @@ const routes = [
     component: () => import('../master/setup/role.vue'),
   },
   {
-    path: '/role/form',
+    path: '/role/form/:id?',
     name: 'role form',
     component: () => import('../master/setup/role-form.vue'),
   },
@@ -117,7 +117,7 @@ const routes = [
     component: () => import('../master/marketing/customer.vue'),
   },
   {
-    path: '/form/customer',
+    path: '/form/customer/:id?',
     name: 'customer form',
     component: () => import('../master/marketing/customer-form.vue'),
   },
@@ -160,6 +160,36 @@ const routes = [
     path: '/form/pricelist',
     name: 'pricelist form',
     component: () => import('../master/marketing/pricelist-form.vue'),
+  },
+  {
+    path: '/master/customer-group',
+    name: 'customer group',
+    component: () => import('../master/marketing/customer-group.vue'),
+  },
+  {
+    path: '/form/customer-group',
+    name: 'customer group form',
+    component: () => import('../master/marketing/customer-group-form.vue'),
+  },
+  {
+    path: '/master/promo',
+    name: 'promo',
+    component: () => import('../master/marketing/promo.vue'),
+  },
+  {
+    path: '/form/promo',
+    name: 'promo form',
+    component: () => import('../master/marketing/promo-form.vue'),
+  },
+  {
+    path: '/master/diskon',
+    name: 'diskon',
+    component: () => import('../master/marketing/diskon.vue'),
+  },
+  {
+    path: '/form/diskon',
+    name: 'diskon form',
+    component: () => import('../master/marketing/diskon-form.vue'),
   },
 ];
 

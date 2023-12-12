@@ -77,16 +77,28 @@ const menu = ref([
             to: '/master/customer',
           },
           {
-            label: 'KENDARAAN',
-            to: '/master/kendaraan',
+            label: 'CUSTOMER GROUP',
+            to: '/master/customer-group',
           },
           {
             label: 'SPV',
             to: '/master/spv',
           },
           {
+            label: 'KENDARAAN',
+            to: '/master/kendaraan',
+          },
+          {
             label: 'EKSPEDISI',
             to: '/master/ekspedisi',
+          },
+          {
+            label: 'PROMO',
+            to: '/master/promo',
+          },
+          {
+            label: 'DISKON',
+            to: '/master/diskon',
           },
           {
             label: 'PRICELIST',
