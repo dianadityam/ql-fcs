@@ -181,7 +181,7 @@ if (props.ctrlKFocus) {
 
     <div v-else-if="computedType === 'checkbox'">
       <input type="checkbox" :id="id" v-model="computedValue" :name="name" :label="label" />
-      <label class="font-bold text-sm ml-3">{{ label }}</label>
+      <label class="text-sm ml-3">{{ label }}</label>
     </div>
 
     <input
