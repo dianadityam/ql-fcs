@@ -8,7 +8,7 @@
         </router-link>
         <div class="my-5">
           <TableData
-            :data="kendaraan"
+            :data="data"
             :columns="columns"
             :tableHeader="tableHeader"
             :tableOptions="tableOptions"
@@ -33,23 +33,13 @@ const tableOptions = {
 
 const tableHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'Kode' },
-  { id: 3, title: 'Merk Kendaraan' },
-  { id: 4, title: 'Kapasitas' },
-  { id: 5, title: 'Nopol' },
-  { id: 6, title: 'Status' },
+  { id: 2, title: 'Last Update' },
+  { id: 3, title: 'Catatan' },
 ];
 
-const kendaraan = ref(null);
+const data = ref(null);
 
-const columns = [
-  { width: '5%', data: 'id' },
-  { data: 'kode' },
-  { data: 'merk' },
-  { data: 'kapasitas' },
-  { data: 'plat_no' },
-  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
-];
+const columns = [{ width: '5%', data: 'id' }, { data: 'kode' }, { data: 'note' }];
 
 const fetchData = async () => {
   const result = await service({
@@ -58,7 +48,7 @@ const fetchData = async () => {
     token: true,
   });
   if (result.status === 200) {
-    kendaraan.value = result.response.data;
+    data.value = result.response.data;
   }
 };
 
