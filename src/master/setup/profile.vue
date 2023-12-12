@@ -41,11 +41,12 @@ const tableHeader = [
 const user = ref(null);
 
 const columns = [
-  { data: null, render: (data, type, row, meta) => meta.row + 1 },
-  { data: 'email' },
+  { width: '5%', data: 'id' },
   { data: 'username' },
+  { data: 'name' },
   { data: 'usertype' },
-  { data: 'status' },
+  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
+
   { data: 'created_at' },
 ];
 

@@ -29,7 +29,7 @@
               type="text"
               class="border-2 px-2 text-sm bg-[#D2D6DE]"
               disabled
-              v-model="form.nama"
+              v-model="form.name"
             />
           </InputField>
           <InputField label="User Login" required>
@@ -50,8 +50,28 @@
         </div>
         <div class="">
           <strong class="block my-2">Profile Detail</strong>
-          <Button @click="toggleModal" color="info" class="" label="Add To List" small />
-          <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
+          <Button @click="showDetailModal" color="info" class="" label="Add To List" small />
+          <DataTable
+            :data="roleDetail"
+            :columns="roleColumns"
+            :table-header="detailListHeader"
+            :options="tableOptions"
+            class="stripe pageResize"
+            ref="table"
+          >
+            <thead>
+              <tr>
+                <th v-for="item in detailListHeader" :key="item.id">{{ item.title }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in data" :key="item.id">
+                <td>
+                  {{ item }}
+                </td>
+              </tr>
+            </tbody>
+          </DataTable>
         </div>
         <div class="flex justify-between">
           <div>
@@ -85,7 +105,7 @@
     <Modal
       :showModal="isShowKaryawan"
       @toggle-modal="showKaryawanModal"
-      @submit="setData"
+      @submit="setDataKaryawan"
       submitLabel="Pilih Karyawan"
     >
       <template #header>Custom header</template>
@@ -117,17 +137,32 @@
     <Modal
       :showModal="isShowDetail"
       @toggle-modal="showDetailModal"
-      @submit="setData"
-      submitLabel="Pilih"
+      @submit="addRole"
+      submitLabel="Tambah"
     >
       <template #header>Custom header</template>
       <template #content>
-        <TableData
-          :data="user"
-          :columns="columns"
-          :tableHeader="tableHeader"
-          :tableOptions="tableOptions"
-        />
+        <DataTable
+          :data="roleData"
+          :columns="roleColumns"
+          :table-header="roleHeader"
+          :options="tableKaryawanOptions"
+          class="stripe pageResize"
+          ref="tableRole"
+        >
+          <thead>
+            <tr>
+              <th v-for="item in roleHeader" :key="item.id">{{ item.title }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in data" :key="item.id">
+              <td>
+                {{ item }}
+              </td>
+            </tr>
+          </tbody>
+        </DataTable>
       </template>
       <template #footer>Custom content</template>
     </Modal>
@@ -146,16 +181,23 @@ import BaseIcon from '@/components/BaseIcon.vue';
 import { mdiMagnify } from '@mdi/js';
 import { reactive, ref, onMounted, watch, computed } from 'vue';
 
+DataTable.use(DataTablesCore);
+
 const selectedKaryawan = ref([]);
 const isShowKaryawan = ref(false);
 const dataKaryawan = ref(null);
 const table = ref(null);
+const roleData = ref(null);
+const tableRole = ref(null);
+const roleDetail = ref([]);
+const isShowDetail = ref(false);
 
 onMounted(() => {
-  fetchData();
+  fetchDataKaryawan();
+  fetchRoleData();
 });
 
-const fetchData = async () => {
+const fetchDataKaryawan = async () => {
   const result = await service({
     method: 'GET',
     url: 'operation/m_karyawan?paginate=100',
@@ -166,11 +208,21 @@ const fetchData = async () => {
   }
 };
 
+const fetchRoleData = async () => {
+  const result = await service({
+    method: 'GET',
+    url: 'operation/m_roles',
+    token: true,
+  });
+  if (result.status === 200) {
+    roleData.value = result.response.data;
+  }
+};
+
 const onSubmit = () => {
   const dataToSubmit = {
     ...form,
-    usertype: form.usertype.label,
-    status: form.status.label,
+    is_active: form.status.id,
   };
   console.log(dataToSubmit);
   service({
@@ -181,32 +233,25 @@ const onSubmit = () => {
   });
 };
 
-function setData() {
+const setDataKaryawan = () => {
   table.value.dt.rows({ selected: true }).every(function () {
     selectedKaryawan.value.push(this.data());
     isShowKaryawan.value = false;
   });
-}
+};
+
+const addRole = () => {
+  tableRole.value.dt.rows({ selected: true }).every(function () {
+    roleDetail.value.push(this.data());
+    isShowDetail.value = false;
+  });
+};
 
 const detailListHeader = [
   { id: 1, title: 'No.' },
   { id: 2, title: 'Kode Role' },
   { id: 3, title: 'Nama Role' },
 ];
-
-const tableOptions = {
-  paging: false,
-  searching: false,
-  responsive: true,
-  processing: true,
-};
-
-DataTable.use(DataTablesCore);
-const tableKaryawanOptions = {
-  select: {
-    selector: 'td:first-child',
-  },
-};
 
 const tableHeader = [
   { id: 1, title: 'NIK' },
@@ -215,27 +260,43 @@ const tableHeader = [
   { id: 4, title: null },
 ];
 
-const columns = [{ data: 'nik' }, { data: 'nama' }, { data: 'alamat_d' }, { data: 'id' }];
-
-const typeOptions = [
-  { id: 1, label: 'SUPER ADMIN' },
-  { id: 2, label: 'ADMIN' },
-  { id: 3, label: 'USER' },
+const roleHeader = [
+  { id: 1, title: 'ID' },
+  { id: 2, title: 'Kode Role' },
+  { id: 3, title: 'Nama Role' },
 ];
 
+const columns = [{ data: 'nik' }, { data: 'nama' }, { data: 'alamat_d' }, { data: 'id' }];
+
+const roleColumns = [{ data: 'id' }, { data: 'kode' }, { data: 'nama' }];
+
+const tableOptions = {
+  paging: false,
+  searching: false,
+  responsive: true,
+  processing: true,
+};
+
+const tableKaryawanOptions = {
+  select: true,
+};
+
+const typeOptions = ['SUPER ADMIN', 'ADMIN', 'USER'];
+
 const statusOptions = [
+  { id: 0, label: 'TIDAK AKTIF' },
   { id: 1, label: 'AKTIF' },
-  { id: 2, label: 'TIDAK AKTIF' },
 ];
 
 const form = reactive({
   nik: '',
-  nama: '',
+  name: '',
   username: '',
   usertype: typeOptions[2],
-  status: statusOptions[0],
+  status: statusOptions[1],
   password: '',
   catatan: '',
+  default_user_roles: roleDetail.value,
 });
 
 watch(
@@ -245,7 +306,7 @@ watch(
     console.log(selectedRow);
     if (selectedRow) {
       form.nik = selectedRow.nik;
-      form.nama = selectedRow.nama;
+      form.name = selectedRow.nama;
     }
   },
   { deep: true }
@@ -254,7 +315,7 @@ watch(
 const isFormValid = computed(() => {
   return (
     form.nik.trim() !== '' &&
-    form.nama.trim() !== '' &&
+    form.name.trim() !== '' &&
     form.username.trim() !== '' &&
     form.password.trim() !== ''
   );
@@ -266,5 +327,9 @@ const showKaryawanModal = () => {
   } else {
     isShowKaryawan.value = !isShowKaryawan.value;
   }
+};
+
+const showDetailModal = () => {
+  isShowDetail.value = !isShowDetail.value;
 };
 </script>
