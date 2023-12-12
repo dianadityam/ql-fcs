@@ -12,6 +12,8 @@ export default {
     extend: {
       colors: {
         'bg-sidebar': '#091943',
+        'primary': '#2D9CDB',
+        'submit': '#4CAE4C'
       },
     },
   },
