@@ -3,19 +3,9 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 
 export const useMainStore = defineStore('main', () => {
-  const userName = ref('John Doe');
-  const userEmail = ref('doe.doe.doe@example.com');
-  const userAvatar = computed(
-    () =>
-      `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
-        /[^a-z0-9]+/gi,
-        '-'
-      )}`
-  );
-
+  const env = ref(import.meta.env.VITE_APP_BASE_URL)
+  const token = ref(localStorage.getItem('authToken'))
   const isFieldFocusRegistered = ref(false);
-  const clients = ref([]);
-  const history = ref([]);
 
   function setUser(payload) {
     if (payload.name) {
@@ -26,37 +16,51 @@ export const useMainStore = defineStore('main', () => {
     }
   }
 
-  function fetchSampleClients() {
-    axios
-      .get(`data-sources/clients.json?v=3`)
-      .then((result) => {
-        clients.value = result?.data?.data;
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+  const getApi = async (data) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token.value}`,
+        },
+      }
+      let res = await axios.get(`${env.value}/${data.path}`, config)
+      return res.data
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  function fetchSampleHistory() {
-    axios
-      .get(`data-sources/history.json`)
-      .then((result) => {
-        history.value = result?.data?.data;
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+  const postApi = async (data) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token.value}`,
+        },
+      }
+      let res = await axios.post(`${env.value}/${data.path}`, data.body, config)
+      return res.data
+    } catch (error) {
+      throw error.response.data
+    }
+  }
+  const updateApi = async (data) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token.value}`,
+        },
+      }
+      let res = await axios.put(`${env.value}/${data.path}`, data.body, config)
+      return res.data
+    } catch (error) {
+      throw error
+    }
   }
 
   return {
-    userName,
-    userEmail,
-    userAvatar,
     isFieldFocusRegistered,
-    clients,
-    history,
     setUser,
-    fetchSampleClients,
-    fetchSampleHistory,
+    getApi,
+    postApi,
+    updateApi
   };
 });

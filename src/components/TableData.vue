@@ -24,16 +24,16 @@
 </template>
 
 <script setup>
-import DataTable from 'datatables.net-vue3';
-import DataTablesCore from 'datatables.net';
-import 'datatables.net-select';
-import 'datatables.net-responsive';
-import { onMounted, ref } from 'vue';
+import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+import "datatables.net-select";
+import "datatables.net-responsive";
+import { onMounted, ref } from "vue";
 
 let dt;
 const table = ref(null);
 
-const emit = defineEmits(['get-row-data']);
+const emit = defineEmits(["get-row-data"]);
 
 onMounted(() => {
   dt = table.value.dt;
@@ -57,5 +57,5 @@ DataTable.use(DataTablesCore);
 </script>
 
 <style>
-@import 'datatables.net-dt';
+@import "datatables.net-dt";
 </style>

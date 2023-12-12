@@ -6,7 +6,7 @@
 
 <script setup>
 const props = defineProps({
-  bg: { type: String, default: "bg-primary" },
+  bg: { type: String, default: "bg-submit" },
   shadow: { type: String, default: "shadow-primary" },
   type: { type: String, default: "button" },
   flat: { type: Boolean, default: true },

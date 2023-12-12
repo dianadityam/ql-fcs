@@ -15,6 +15,9 @@ const Btn = defineAsyncComponent(() =>
 const mdicon = defineAsyncComponent(() =>
     import("../components/BaseIcon.vue"),
 );
+const BaseDialog = defineAsyncComponent(() =>
+    import("../components/BaseDialog.vue"),
+);
 
 export const globalcomponent = (app) => {
     app.component("LayoutMain", LayoutMain);
@@ -22,4 +25,5 @@ export const globalcomponent = (app) => {
     app.component("InputField", InputField);
     app.component("Btn", Btn);
     app.component("mdicon", mdicon);
+    app.component("BaseDialog", BaseDialog);
 };

@@ -71,6 +71,51 @@ const routes = [
     name: 'hris',
     component: () => import('../master/purchasing/pricelist-supplier.vue'),
   },
+  {
+    path: '/master/supplier',
+    name: 'master-supplier',
+    component: () => import('../master/purchasing/supplier/list-supplier.vue'),
+  },
+  {
+    path: '/master/supplier/create',
+    name: 'master-supplier-create',
+    component: () => import('../master/purchasing/supplier/create-supplier.vue'),
+  },
+  {
+    path: '/master/item',
+    name: 'master-item',
+    component: () => import('../master/purchasing/item/item-list.vue'),
+  },
+  {
+    path: '/master/item-benang',
+    name: 'master-item-benang',
+    component: () => import('../master/purchasing/item/form/form-benang.vue'),
+  },
+  {
+    path: '/master/item-greige-knitting',
+    name: 'master-item-greige-knitting',
+    component: () => import('../master/purchasing/item/form/form-greige-knitting.vue'),
+  },
+  {
+    path: '/master/item-greige-woven',
+    name: 'master-item-greige-woven',
+    component: () => import('../master/purchasing/item/form/greige-woven.vue'),
+  },
+  {
+    path: '/master/item-kain-woven',
+    name: 'master-item-kain-woven',
+    component: () => import('../master/purchasing/item/form/kain-woven.vue'),
+  },
+  {
+    path: '/master/item-kain-knitting',
+    name: 'master-item-kain-knitting',
+    component: () => import('../master/purchasing/item/form/kain-knitting.vue'),
+  },
+  {
+    path: '/master/item-lain-lain',
+    name: 'master-item-lain-lain',
+    component: () => import('../master/purchasing/item/form/lain-lain.vue'),
+  },
 ];
 
 const router = createRouter({

@@ -44,6 +44,10 @@ const props = defineProps({
     type: [String, Number, Boolean, Array, Object],
     default: "",
   },
+  bg: {
+    type: String,
+    default: "",
+  },
   required: Boolean,
   borderless: Boolean,
   transparent: Boolean,
@@ -61,11 +65,12 @@ const computedValue = computed({
 
 const inputElClass = computed(() => {
   const base = [
-    "px-3 max-w-full focus:ring focus:outline-none border-gray-700 rounded",
+    "p-1 px-3 w-full focus:ring-2 focus:outline-none rounded text-sm",
     computedType.value === "select" ? "" : "py-2 w-full",
-    computedType.value === "textarea" ? "h-22" : "h-8",
-    props.borderless ? "border-0" : "border",
+    computedType.value === "textarea" ? "h-22" : "h-9",
+    props.borderless ? "border-0" : "border-2",
     props.transparent ? "bg-transparent" : "bg-white",
+    props.bg ? props.bg : "",
   ];
 
   if (props.icon) {
@@ -139,7 +144,7 @@ if (props.ctrlKFocus) {
         :key="option.id ?? option"
         :value="option"
       >
-        {{ option.label ?? option }}
+        <p class="p-2">{{ option.label ?? option }}</p>
       </option>
     </select>
     <textarea

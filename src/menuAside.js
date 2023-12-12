@@ -43,8 +43,16 @@ const menu = ref([
             to: '/master/merk',
           },
           {
-            label: 'SUPPLIER',
+            label: 'PRICELIST SUPPLIER',
             to: '/master/pricelist-supplier',
+          },
+          {
+            label: 'SUPPLIER',
+            to: '/master/supplier',
+          },
+          {
+            label: 'ITEM',
+            to: '/master/item',
           },
         ],
       },
