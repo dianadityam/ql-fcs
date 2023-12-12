@@ -111,7 +111,7 @@ const columns = [
   {
     data: null,
     className: 'delete-button cursor-pointer',
-    defaultContent: '<p>X</p>',
+    defaultContent: '<p class="text-red-500 font-bold">x</p>',
     orderable: false,
   },
 ];
