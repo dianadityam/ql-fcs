@@ -1,7 +1,7 @@
 <template>
   <LayoutMain>
     <div class="px-9 min-h-screen">
-      <h1>Role List</h1>
+      <h1>Karyawan List</h1>
       <div class="content-section">
         <router-link to="/form/karyawan">
           <Button class="py-2" color="info" outline label="Create New" small />
