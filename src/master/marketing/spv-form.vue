@@ -51,13 +51,18 @@
                   :path="mdiMagnify"
                   size="18"
                   class="absolute right-0 h-7 w-9 border rounded-sm top-[1px] cursor-pointer"
-                  @click="showKaryawanModal"
+                  @click="showSalesModal"
                 />
               </div>
             </div>
           </InputField>
           <Button @click="toggleModal" color="info" class="" label="Add To List" small />
-          <TableData :tableHeader="detailListHeader" :tableOptions="tableOptions" />
+          <TableData
+            :tableHeader="detailListHeader"
+            :tableOptions="tableOptions"
+            :data="selectedSales"
+            :columns="detailListColumns"
+          />
         </div>
         <div class="flex justify-between">
           <div>
@@ -78,7 +83,7 @@
               color="white"
               label="Cancel"
               class="ml-2"
-              @click="$router.push('/master/profile')"
+              @click="$router.push('/master/spv')"
               :class="{ 'opacity-25': form.processing }"
               :disabled="form.processing"
               small
@@ -91,8 +96,8 @@
     <Modal
       :showModal="isShowKaryawan"
       @toggle-modal="showKaryawanModal"
-      @submit="setData"
-      submitLabel="Pilih Karyawan"
+      @submit="setDataSpv"
+      submitLabel="Pilih SPV"
     >
       <template #header>Custom header</template>
       <template #content>
@@ -121,19 +126,40 @@
       <template #footer>Custom content</template>
     </Modal>
     <Modal
-      :showModal="isShowDetail"
-      @toggle-modal="showDetailModal"
-      @submit="setData"
-      submitLabel="Pilih"
+      :showModal="isShowSales"
+      @toggle-modal="showSalesModal"
+      @submit="setDataSales"
+      submitLabel="Pilih Sales"
     >
       <template #header>Custom header</template>
       <template #content>
-        <TableData
+        <!-- <TableData
           :data="user"
           :columns="columns"
           :tableHeader="tableHeader"
           :tableOptions="tableOptions"
-        />
+        /> -->
+        <DataTable
+          :data="dataKaryawan"
+          :columns="columns"
+          :table-header="tableHeader"
+          :options="tableKaryawanOptions"
+          class="stripe pageResize"
+          ref="tableSales"
+        >
+          <thead>
+            <tr>
+              <th v-for="item in tableHeader" :key="item.id">{{ item.title }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in data" :key="item.id">
+              <td>
+                {{ item }}
+              </td>
+            </tr>
+          </tbody>
+        </DataTable>
       </template>
       <template #footer>Custom content</template>
     </Modal>
@@ -153,8 +179,11 @@ import { mdiMagnify } from '@mdi/js';
 import { reactive, ref, onMounted, watch, computed } from 'vue';
 
 const selectedKaryawan = ref([]);
+const selectedSales = ref([]);
 const isShowKaryawan = ref(false);
+const isShowSales = ref(false);
 const dataKaryawan = ref(null);
+const tableSales = ref(null);
 const table = ref(null);
 
 onMounted(() => {
@@ -173,31 +202,45 @@ const fetchData = async () => {
 };
 
 const onSubmit = () => {
+  const spvDet = selectedSales.value.map((item) => {
+    item.nama;
+  });
   const dataToSubmit = {
     ...form,
-    usertype: form.usertype.label,
-    status: form.status.label,
+    is_active: form.status.id,
+    m_spv_det: selectedSales.value,
   };
   console.log(dataToSubmit);
   service({
     method: 'POST',
-    url: '/operation/default_users',
+    url: '/operation/m_spv',
     token: true,
     data: dataToSubmit,
   });
 };
 
-function setData() {
+const setDataSpv = () => {
   table.value.dt.rows({ selected: true }).every(function () {
     selectedKaryawan.value.push(this.data());
     isShowKaryawan.value = false;
   });
-}
+};
+
+const setDataSales = () => {
+  tableSales.value.dt.rows({ selected: true }).every(function () {
+    selectedSales.value.push(this.data());
+    isShowSales.value = false;
+  });
+};
 
 const detailListHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'Kode Role' },
-  { id: 3, title: 'Nama Role' },
+  { id: 2, title: 'Nama Sales' },
+];
+
+const detailListColumns = [
+  { data: null, render: (data, type, row, meta) => meta.row + 1 },
+  { data: 'nama' },
 ];
 
 const tableOptions = {
@@ -209,9 +252,7 @@ const tableOptions = {
 
 DataTable.use(DataTablesCore);
 const tableKaryawanOptions = {
-  select: {
-    selector: 'td:first-child',
-  },
+  select: true,
 };
 
 const tableHeader = [
@@ -223,25 +264,17 @@ const tableHeader = [
 
 const columns = [{ data: 'nik' }, { data: 'nama' }, { data: 'alamat_d' }, { data: 'id' }];
 
-const typeOptions = [
-  { id: 1, label: 'SUPER ADMIN' },
-  { id: 2, label: 'ADMIN' },
-  { id: 3, label: 'USER' },
-];
-
 const statusOptions = [
+  { id: 0, label: 'TIDAK AKTIF' },
   { id: 1, label: 'AKTIF' },
-  { id: 2, label: 'TIDAK AKTIF' },
 ];
 
 const form = reactive({
-  nik: '',
-  kode: '',
-  username: '',
-  usertype: typeOptions[2],
+  kode: 'SPV001',
+  spv: '',
+  sales: '',
   status: statusOptions[0],
-  password: '',
-  catatan: '',
+  spv_id: '',
 });
 
 watch(
@@ -250,20 +283,15 @@ watch(
     const selectedRow = newSelected.value[0];
     console.log(selectedRow);
     if (selectedRow) {
-      form.nik = selectedRow.nik;
-      form.nama = selectedRow.nama;
+      form.spv = selectedRow.nama;
+      form.spv_id = selectedRow.id;
     }
   },
   { deep: true }
 );
 
 const isFormValid = computed(() => {
-  return (
-    form.nik.trim() !== '' &&
-    form.nama.trim() !== '' &&
-    form.username.trim() !== '' &&
-    form.password.trim() !== ''
-  );
+  return selectedSales.value.length > 0 && form.spv.trim() !== '';
 });
 const showKaryawanModal = () => {
   if (!isShowKaryawan.value && selectedKaryawan.value.length > 0) {
@@ -272,5 +300,9 @@ const showKaryawanModal = () => {
   } else {
     isShowKaryawan.value = !isShowKaryawan.value;
   }
+};
+
+const showSalesModal = () => {
+  isShowSales.value = !isShowSales.value;
 };
 </script>

@@ -35,7 +35,7 @@ const tableHeader = [
   { id: 1, title: 'No.' },
   { id: 2, title: 'Kode' },
   { id: 3, title: 'Nama' },
-  { id: 4, title: 'Catatan' },
+  { id: 4, title: 'Status' },
 ];
 
 const warehouse = ref(null);
@@ -43,14 +43,14 @@ const warehouse = ref(null);
 const columns = [
   { width: '5%', data: 'id' },
   { data: 'kode' },
-  { data: 'nama' },
-  { data: 'catatan' },
+  { data: 'spv\\.nama' },
+  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
 ];
 
 const fetchData = async () => {
   const result = await service({
     method: 'GET',
-    url: 'operation/m_warehouse',
+    url: 'operation/m_spv',
     token: true,
   });
   if (result.status === 200) {
