@@ -6,7 +6,7 @@
         <strong>Pricelist Header</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="pt-5">
-          <strong>Customer Detail</strong>
+          <strong>Pricelist Detail</strong>
           <div class="grid grid-cols-4 max-w-lg gap-1 mt-5">
             <p
               @click="changeTab(1)"
