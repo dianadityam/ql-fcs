@@ -1,3 +1,106 @@
+@import 'datatables.net-dt';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+table {
+  margin: 0 0 150px 0 !important;
+}
+.datatable {
+  font-size: 14px;
+}
+.dataTables_wrapper .dataTables_length select {
+  margin: 0 10px;
+  padding: 4px 6px;
+  border: 1px solid #cccccc;
+}
+.dataTables_wrapper .dataTables_filter input {
+  margin: 0 0 0 10px;
+  border: 1px solid #cccccc;
+}
+table.dataTable.no-footer {
+  border: none;
+}
+.dataTables_wrapper .dataTables_filter {
+  margin: 0 0 30px 0;
+}
+.dataTables_wrapper .dataTables_length {
+  margin: 0 0 30px 0;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background: #2f80ed !important;
+  color: white !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+  border: solid 1px #cccccc;
+  border-radius: 3px;
+}
+
+body {
+  background-color: #f4f4f4 !important;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+strong {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 10px;
+  margin: 7px 20px 7px 0;
+}
+
+.custom-select {
+  border: 0;
+  border-right: 16px solid transparent;
+  outline: 1px solid #cccccc;
+}
+
+.aside {
+  background-color: #091943;
+  font-size: 14px;
+}
+.aside-scrollbars {
+  @apply aside-scrollbars-gray;
+}
+.aside-brand {
+  background-color: #041339;
+}
+.aside-menu-item {
+  @apply text-gray-300 hover:font-bold;
+}
+.aside-menu-item-active {
+  @apply text-white bg-[#2F80ED];
+}
+.aside-menu-dropdown {
+  @apply bg-gray-700/50;
+}
+.navbar-item-label {
+  @apply text-black hover:text-blue-500;
+}
+.navbar-item-label-active {
+  @apply text-blue-600;
+}
+.overlay {
+  @apply from-gray-700 via-gray-900 to-gray-700;
+}
+.content-section {
+  margin: 20px auto;
+  border-top: #2f80ed solid;
+  border-radius: 3px;
+  background-color: white;
+  padding: 26px;
+}
