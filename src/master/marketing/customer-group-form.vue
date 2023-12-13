@@ -1,9 +1,9 @@
 <template>
   <LayoutMain>
     <div class="px-9">
-      <h1>Master Ekspedisi</h1>
+      <h1>Form Customer Group</h1>
       <div class="content-section">
-        <strong>Master Ekspedisi Header</strong>
+        <strong>Customer Group</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
           <InputField label="Kode">
