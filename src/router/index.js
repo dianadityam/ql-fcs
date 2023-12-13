@@ -42,7 +42,7 @@ const routes = [
     component: () => import('../master/setup/role-form.vue'),
   },
   {
-    path: '/profile/form',
+    path: '/form/profile/:id?',
     name: 'create profile',
     component: () => import('../master/setup/profile-form.vue'),
   },
@@ -97,7 +97,7 @@ const routes = [
     component: () => import('../master/setup/general.vue'),
   },
   {
-    path: '/form/general',
+    path: '/form/general/:id?',
     name: 'general form',
     component: () => import('../master/setup/general-form.vue'),
   },
@@ -107,7 +107,7 @@ const routes = [
     component: () => import('../master/setup/warehouse.vue'),
   },
   {
-    path: '/form/warehouse',
+    path: '/form/warehouse/:id?',
     name: 'warehouse form',
     component: () => import('../master/setup/warehouse-form.vue'),
   },
