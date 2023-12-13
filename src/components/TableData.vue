@@ -9,7 +9,6 @@
   >
     <thead>
       <tr>
-        <th v-if="checkable" />
         <th v-for="item in tableHeader" :key="item.id">{{ item.title }}</th>
       </tr>
     </thead>
@@ -37,7 +36,7 @@ const emit = defineEmits(['get-row-data']);
 
 onMounted(() => {
   dt = table.value.dt;
-  console.log(dt);
+  table.value.dtInstance = dt;
 });
 
 defineProps({

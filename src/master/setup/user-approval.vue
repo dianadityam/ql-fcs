@@ -1,7 +1,7 @@
 <template>
   <LayoutMain>
     <div class="px-9 min-h-screen">
-      <h1>Role List</h1>
+      <h1>List of User Approval</h1>
       <div class="content-section">
         <router-link to="/form/user-approval">
           <Button class="py-2" color="info" outline label="Create New" small />
@@ -12,7 +12,6 @@
             :columns="columns"
             :tableHeader="tableHeader"
             :tableOptions="tableOptions"
-            checkable
           />
         </div>
       </div>
@@ -44,13 +43,12 @@ const tableHeader = [
 const user = ref(null);
 
 const columns = [
-  // { width: '5%', data: null, render: (data, type, row, meta) => meta.row + 1 },
   { width: '5%', data: 'id' },
   { data: 'default_users_id' },
   { data: 'default_users_id' },
   { data: 'table_name' },
   { data: 'level' },
-  { data: 'status' },
+  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
 ];
 
 const fetchData = async () => {

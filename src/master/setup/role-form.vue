@@ -4,7 +4,8 @@
       <h1>Form Profile</h1>
       <div class="content-section">
         <strong>Role Header</strong>
-        <p class="font-bold text-red-600 mt-5">New Data</p>
+        <p v-if="$route.params.id" class="font-bold text-red-600 mt-5">Edit Data</p>
+        <p v-else class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid grid-cols-2 my-5">
           <FormField label="Code">
             <FormControl v-model="form.kode" />
@@ -50,7 +51,7 @@
               type="submit"
               color="white"
               label="Cancel"
-              @click="onSubmit"
+              @click="$router.push('/master/role')"
               :class="{ 'opacity-25': form.processing }"
               :disabled="form.processing"
               small
@@ -60,87 +61,38 @@
         </div>
       </div>
     </div>
-    <!-- <Modal
-      :showModal="isShowKaryawan"
-      @toggle-modal="showKaryawanModal"
-      @submit="setData"
-      submitLabel="Pilih Karyawan"
-    >
-      <template #header>Custom header</template>
-      <template #content>
-        <DataTable
-          :data="dataKaryawan"
-          :columns="columns"
-          :table-header="tableHeader"
-          :options="tableKaryawanOptions"
-          class="stripe pageResize"
-          ref="table"
-        >
-          <thead>
-            <tr>
-              <th v-if="checkable" />
-              <th v-for="item in tableHeader" :key="item.id">{{ item.title }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in data" :key="item.id">
-              <td>
-                {{ item }}
-              </td>
-            </tr>
-          </tbody>
-        </DataTable>
-      </template>
-      <template #footer>Custom content</template>
-    </Modal> -->
   </LayoutMain>
 </template>
 
 <script setup>
-import DataTable from 'datatables.net-vue3';
-import DataTablesCore from 'datatables.net';
-import 'datatables.net-select';
-import 'datatables.net-responsive';
 import LayoutMain from '@/layouts/LayoutMain.vue';
 import FormField from '@/components/FormField.vue';
 import FormControl from '@/components/FormControl.vue';
 import TableData from '@/components/TableData.vue';
-import Modal from '@/components/Modal.vue';
 import Button from '@/components/Button.vue';
 import service from '@/services';
+import { useRoute } from 'vue-router';
 import { reactive, ref, onMounted, watch } from 'vue';
 
-const selectedKaryawan = ref([]);
-const isShowKaryawan = ref(false);
-const dataKaryawan = ref(null);
-const table = ref(null);
+const route = useRoute();
 
 onMounted(() => {
-  fetchData();
-});
-
-const fetchData = async () => {
-  const result = await service({
-    method: 'GET',
-    url: 'operation/m_karyawan?paginate=100',
-    token: true,
-  });
-  if (result.status === 200) {
-    dataKaryawan.value = result.response.data;
+  if (route.params.id) {
+    updateValue();
   }
-};
+});
 
 const onSubmit = () => {
   const dataToSubmit = {
     kode: form.kode,
     nama: form.nama,
-    status: form.status.label,
+    is_active: form.status.id,
     m_roles_permission: roleDetail.value,
   };
   console.log(dataToSubmit);
   service({
-    method: 'POST',
-    url: '/operation/m_roles',
+    method: route.params.id ? 'PUT' : 'POST',
+    url: route.params.id ? '/operation/m_roles/' + route.params.id : '/operation/m_roles',
     token: true,
     data: dataToSubmit,
   });
@@ -150,20 +102,13 @@ const roleDetail = ref([]);
 
 const handleAddDetail = () => {
   roleDetail.value.push({
-    modul: form.module.label,
-    path: form.type.label,
+    modul: form.module,
+    path: form.type,
     menu: 'Departemen',
     endpoint: `~${form.type.label.toLowerCase()}/${form.module.label.toLowerCase()}`,
   });
   console.log(roleDetail);
 };
-
-// function setData() {
-//   table.value.dt.rows({ selected: true }).every(function () {
-//     selectedKaryawan.value.push(this.data());
-//     isShowKaryawan.value = false;
-//   });
-// }
 
 const detailListHeader = [
   { id: 1, title: 'No.' },
@@ -188,21 +133,13 @@ const tableOptions = {
   processing: true,
 };
 
-DataTable.use(DataTablesCore);
+const typeOptions = ['Master', 'Transaction'];
 
-const typeOptions = [{ label: 'Master' }, { label: 'Transaction' }];
-
-const moduleOptions = [
-  { label: 'SETUP' },
-  { label: 'MARKETING' },
-  { label: 'PURCHASING' },
-  { label: 'ACCOUNTING' },
-  { label: 'HRIS' },
-];
+const moduleOptions = ['SETUP', 'MARKETING', 'PURCHASING', 'ACCOUNTING', 'HRIS'];
 
 const statusOptions = [
+  { id: 0, label: 'TIDAK AKTIF' },
   { id: 1, label: 'AKTIF' },
-  { id: 2, label: 'TIDAK AKTIF' },
 ];
 
 const form = reactive({
@@ -210,27 +147,24 @@ const form = reactive({
   nama: '',
   module: moduleOptions[2],
   type: typeOptions[0],
-  status: statusOptions[0],
+  status: statusOptions[1],
 });
 
-watch(
-  () => selectedKaryawan,
-  (newSelected) => {
-    const selectedRow = newSelected.value[0];
-    console.log(selectedRow);
-    if (selectedRow) {
-      form.nik = selectedRow.nik;
-      form.nama = selectedRow.nama;
-    }
-  },
-  { deep: true }
-);
-const showKaryawanModal = () => {
-  if (!isShowKaryawan.value && selectedKaryawan.value.length > 0) {
-    selectedKaryawan.value = [];
-    isShowKaryawan.value = !isShowKaryawan.value;
-  } else {
-    isShowKaryawan.value = !isShowKaryawan.value;
+const updateValue = async () => {
+  const result = await service({
+    method: 'GET',
+    url: '/operation/m_roles/' + route.params.id,
+    token: true,
+  });
+  if (result.status === 200) {
+    console.log(result);
+    const response = result.response.data;
+    form.kode = response.kode;
+    form.nama = response.nama;
+    form.module = moduleOptions.find((x) => x === response.m_roles_permission[0].modul);
+    form.type = typeOptions.find((x) => x === response.m_roles_permission[0].path);
+    form.status = response.is_active ? statusOptions[1] : statusOptions[0];
+    roleDetail.value = response.m_roles_permission;
   }
 };
 </script>

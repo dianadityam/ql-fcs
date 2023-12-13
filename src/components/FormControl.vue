@@ -63,6 +63,13 @@ const computedValue = computed({
   },
 });
 
+const numbersOnly = (evt) => {
+  const charCode = evt.which ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || (charCode > 57 && charCode !== 46))) {
+    evt.preventDefault();
+  }
+};
+
 const inputElClass = computed(() => {
   const base = [
     'px-2 max-w-full focus:ring focus:outline-none border-[#CCCCCC] rounded-sm text-sm',
@@ -81,7 +88,7 @@ const inputElClass = computed(() => {
 
 const computedType = computed(() => (props.options ? 'select' : props.type));
 
-const controlIconH = computed(() => (props.type === 'textarea' ? 'h-full' : 'h-12'));
+const controlIconH = computed(() => (props.type === 'textarea' ? 'h-full' : 'h-8'));
 
 const mainStore = useMainStore();
 
@@ -162,18 +169,19 @@ if (props.ctrlKFocus) {
     />
 
     <input
-      type="file"
-      v-else-if="computedType === 'file'"
+      v-else-if="computedType === 'numbers'"
       :id="id"
       :class="inputElClass"
       :name="name"
+      v-model="computedValue"
+      @keypress="numbersOnly"
       :placeholder="placeholder"
       :required="required"
     />
 
     <div v-else-if="computedType === 'checkbox'">
       <input type="checkbox" :id="id" v-model="computedValue" :name="name" :label="label" />
-      <label class="font-bold text-sm ml-3">{{ label }}</label>
+      <label class="text-sm ml-3">{{ label }}</label>
     </div>
 
     <input

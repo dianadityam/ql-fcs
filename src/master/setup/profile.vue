@@ -3,7 +3,7 @@
     <div class="px-9 min-h-screen">
       <h1>Profile List</h1>
       <div class="content-section">
-        <router-link to="/profile/form">
+        <router-link to="/form/profile">
           <Button class="mb-4" color="info" outline label="Create New" small />
         </router-link>
         <div class="my-5">
@@ -12,7 +12,6 @@
             :columns="columns"
             :tableHeader="tableHeader"
             :tableOptions="tableOptions"
-            checkable
           />
         </div>
       </div>
@@ -22,7 +21,7 @@
 
 <script setup>
 import Button from '@/components/Button.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, render } from 'vue';
 import service from '../../services';
 
 const tableOptions = {
@@ -42,11 +41,16 @@ const tableHeader = [
 const user = ref(null);
 
 const columns = [
-  { data: null, render: (data, type, row, meta) => meta.row + 1 },
-  { data: 'email' },
-  { data: 'username' },
+  { width: '5%', data: 'id' },
+  {
+    data: 'username',
+    render: (data, type, row, meta) =>
+      `<a class="text-blue-500 cursor-pointer" href="/form/profile/${row.id}">${data}</a>`,
+  },
+  { data: 'name' },
   { data: 'usertype' },
-  { data: 'status' },
+  { data: 'is_active', render: (data) => (data ? 'Aktif' : 'Inaktif') },
+
   { data: 'created_at' },
 ];
 

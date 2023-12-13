@@ -5,15 +5,21 @@
       <div class="content-section">
         <strong>Warehouse Header</strong>
         <p class="font-bold text-red-600 mt-5">New Data</p>
-        <div class="grid my-5 grid-cols-2">
+        <div class="grid my-5 w-2/4">
           <InputField label="Kode" required>
             <Input v-model="form.kode" :options="userOptions" />
           </InputField>
-          <InputField label="Nama" required>
-            <Input v-model="form.nama" />
+          <InputField label="Merk Kendaraan" required>
+            <Input v-model="form.merk" />
           </InputField>
-          <InputField label="Catatan">
-            <Input v-model="form.catatan" type="textarea" />
+          <InputField label="Kapasitas Kendaraan">
+            <Input v-model="form.kapasitas" />
+          </InputField>
+          <InputField label="Plat Nomor Kendaraan">
+            <Input v-model="form.plat_no" />
+          </InputField>
+          <InputField label="Note">
+            <Input v-model="form.note" />
           </InputField>
           <InputField label="Status">
             <Input v-model="form.status" type="select" :options="statusOptions" />
@@ -37,7 +43,7 @@
               type="submit"
               color="white"
               label="Cancel"
-              @click="$router.push('/master/warehouse')"
+              @click="$router.push('/master/kendaraan')"
               class="ml-2"
               :class="{ 'opacity-25': form.processing }"
               :disabled="form.processing"
@@ -55,55 +61,20 @@
 import LayoutMain from '@/layouts/LayoutMain.vue';
 import service from '@/services';
 import Button from '@/components/Button.vue';
-import { reactive, computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { reactive, computed } from 'vue';
 
-const route = useRoute();
-const router = useRouter();
-const { id } = route.params;
-
-onMounted(() => {
-  if (id) {
-    updateValue();
-  }
-});
-
-const fillForm = (data) => {
-  for (const key in form) {
-    if (key in data) {
-      form[key] = data[key];
-    }
-  }
-};
-
-const updateValue = async () => {
-  const result = await service({
-    method: 'GET',
-    url: `/operation/m_warehouse/${id}`,
-    token: true,
-  });
-  if (result.status === 200) {
-    const response = result.response.data;
-    fillForm(response);
-    form.status = response.is_active ? statusOptions[1] : statusOptions[0];
-  }
-};
-
-const onSubmit = async () => {
+const onSubmit = () => {
   const dataToSubmit = {
     ...form,
     is_active: form.status.id,
   };
   console.log(dataToSubmit);
-  const result = await service({
-    method: id ? 'PUT' : 'POST',
-    url: id ? '/operation/m_warehouse/' + id : '/operation/m_warehouse',
+  service({
+    method: 'POST',
+    url: '/operation/m_kend',
     token: true,
     data: dataToSubmit,
   });
-  if (result.status === 200) {
-    router.push('/master/warehouse');
-  }
 };
 
 const statusOptions = [
@@ -113,12 +84,19 @@ const statusOptions = [
 
 const form = reactive({
   kode: '',
-  nama: '',
-  catatan: '',
+  merk: '',
+  kapasitas: '',
+  plat_no: '',
+  note: '',
   status: statusOptions[0],
 });
 
 const isFormValid = computed(() => {
-  return form.kode.trim() !== '' && form.nama.trim() !== '';
+  return (
+    form.kode.trim() !== '' &&
+    form.merk.trim() !== '' &&
+    form.kapasitas.trim() !== '' &&
+    form.plat_no.trim() !== ''
+  );
 });
 </script>

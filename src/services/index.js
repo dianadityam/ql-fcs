@@ -14,7 +14,7 @@ const getAuthToken = (options) => {
 
 const serviceApi = async (options) => {
   let axiosConfig = {
-    baseURL: 'https://server.qqltech.com:7001/',
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 100000,
   };
 

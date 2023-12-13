@@ -77,7 +77,7 @@ const onSubmit = () => {
     warehouse: form.warehouse.label,
     level: form.level.label,
     table_name: form.tableName.label,
-    status: form.status.is_active,
+    is_active: form.status.is_active,
     leveltype: form.levelType,
     note: form.catatan,
   };

@@ -10,7 +10,7 @@
             <Input v-model="form.nama" />
           </InputField>
           <InputField label="NIK" required>
-            <Input v-model="form.nik" />
+            <Input v-model="form.nik" type="numbers" />
           </InputField>
           <InputField label="Tempat Tgl Lahir" required>
             <Input v-model="form.tempat_lahir" />
@@ -78,7 +78,7 @@
             <Input v-model="form.email" required />
           </InputField>
           <InputField label="Phone" required>
-            <Input v-model="form.phone" required />
+            <Input v-model="form.phone" type="numbers" required />
           </InputField>
           <InputField label="Foto">
             <InputFile />
@@ -136,8 +136,6 @@ const onSubmit = () => {
   form.processing = true;
   const dataToSubmit = {
     ...form,
-    agama: form.agama.label,
-    jenis_kelamin: form.jenis_kelamin.label,
     is_active: form.status.id,
   };
   console.log(dataToSubmit);
@@ -150,18 +148,9 @@ const onSubmit = () => {
   form.processing = false;
 };
 
-const genderOptions = [
-  { id: 1, label: 'Laki-laki' },
-  { id: 2, label: 'Perempuan' },
-];
+const genderOptions = ['Laki-laki', 'Perempuan'];
 
-const religionOptions = [
-  { id: 1, label: 'ISLAM' },
-  { id: 2, label: 'KRISTEN' },
-  { id: 3, label: 'HINDU' },
-  { id: 4, label: 'BUDDHA' },
-  { id: 5, label: 'KONGHUCU' },
-];
+const religionOptions = ['ISLAM', 'KRISTEN', 'HINDU', 'BUDDHA', 'KONGHUCU'];
 
 const statusOptions = [
   { id: 0, label: 'Inaktif' },
@@ -176,7 +165,7 @@ const form = reactive({
   tgl_lahir: '',
   nid: '',
   divisi: '',
-  tgl_masuk: '',
+  tgl_masuk: null,
   training: false,
   tgl_selesai: '',
   jenis_kelamin: genderOptions[0],
