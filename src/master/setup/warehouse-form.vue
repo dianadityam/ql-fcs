@@ -55,20 +55,55 @@
 import LayoutMain from '@/layouts/LayoutMain.vue';
 import service from '@/services';
 import Button from '@/components/Button.vue';
-import { reactive, computed } from 'vue';
+import { reactive, computed, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-const onSubmit = () => {
+const route = useRoute();
+const router = useRouter();
+const { id } = route.params;
+
+onMounted(() => {
+  if (id) {
+    updateValue();
+  }
+});
+
+const fillForm = (data) => {
+  for (const key in form) {
+    if (key in data) {
+      form[key] = data[key];
+    }
+  }
+};
+
+const updateValue = async () => {
+  const result = await service({
+    method: 'GET',
+    url: `/operation/m_warehouse/${id}`,
+    token: true,
+  });
+  if (result.status === 200) {
+    const response = result.response.data;
+    fillForm(response);
+    form.status = response.is_active ? statusOptions[1] : statusOptions[0];
+  }
+};
+
+const onSubmit = async () => {
   const dataToSubmit = {
     ...form,
     is_active: form.status.id,
   };
   console.log(dataToSubmit);
-  service({
-    method: 'POST',
-    url: '/operation/m_warehouse',
+  const result = await service({
+    method: id ? 'PUT' : 'POST',
+    url: id ? '/operation/m_warehouse/' + id : '/operation/m_warehouse',
     token: true,
     data: dataToSubmit,
   });
+  if (result.status === 200) {
+    router.push('/master/warehouse');
+  }
 };
 
 const statusOptions = [

@@ -33,7 +33,10 @@ const tableOptions = {
 
 const tableHeader = [
   { id: 1, title: 'No.' },
-  { id: 2, title: 'Kode' },
+  {
+    id: 2,
+    title: 'Kode',
+  },
   { id: 3, title: 'Nama' },
   { id: 4, title: 'Catatan' },
 ];
@@ -42,7 +45,11 @@ const warehouse = ref(null);
 
 const columns = [
   { width: '5%', data: 'id' },
-  { data: 'kode' },
+  {
+    data: 'kode',
+    render: (data, type, row, meta) =>
+      `<a class="text-blue-500 cursor-pointer" href="/form/warehouse/${row.id}">${data}</a>`,
+  },
   { data: 'nama' },
   { data: 'catatan' },
 ];

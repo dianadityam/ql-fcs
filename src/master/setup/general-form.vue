@@ -4,7 +4,7 @@
       <h1>Master General</h1>
       <div class="content-section">
         <strong>Master General Header</strong>
-        <p class="font-bold text-red-600 mt-5">New Data</p>
+        <p v-if="!$route.params.id" class="font-bold text-red-600 mt-5">New Data</p>
         <div class="grid my-5 w-2/4">
           <InputField label="Kode" required>
             <Input v-model="form.kode" :options="userOptions" />
@@ -54,21 +54,55 @@
 <script setup>
 import service from '@/services';
 import Button from '@/components/Button.vue';
-import { reactive, watch, computed } from 'vue';
+import { reactive, onMounted, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-const onSubmit = () => {
+const router = useRouter();
+const route = useRoute();
+const { id } = route.params;
+
+onMounted(() => {
+  if (id) {
+    updateValue();
+  }
+});
+
+const fillForm = (data) => {
+  for (const key in form) {
+    if (key in data) {
+      form[key] = data[key];
+    }
+  }
+};
+
+const updateValue = async () => {
+  const result = await service({
+    method: 'GET',
+    url: `/operation/m_general/${id}`,
+    token: true,
+  });
+  if (result.status === 200) {
+    const response = result.response.data;
+    fillForm(response);
+    form.status = response.is_active ? statusOptions[1] : statusOptions[0];
+  }
+};
+
+const onSubmit = async () => {
   const dataToSubmit = {
     ...form,
-    group: form.group.label,
     is_active: form.status.id,
   };
   console.log(dataToSubmit);
-  service({
-    method: 'POST',
-    url: '/operation/m_general',
+  const result = await service({
+    method: id ? 'PUT' : 'POST',
+    url: id ? '/operation/m_general/' + id : '/operation/m_general',
     token: true,
     data: dataToSubmit,
   });
+  if (result.status === 200) {
+    router.push('/master/general');
+  }
 };
 
 const statusOptions = [
@@ -76,10 +110,7 @@ const statusOptions = [
   { id: 1, label: 'AKTIF' },
 ];
 
-const groupOptions = [
-  { id: 1, label: 'VEHICLE TYPE' },
-  { id: 2, label: 'BANK' },
-];
+const groupOptions = ['VEHICLE TYPE', 'BANK'];
 
 const form = reactive({
   kode: '',

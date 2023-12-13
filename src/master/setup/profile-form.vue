@@ -180,8 +180,12 @@ import service from '@/services';
 import BaseIcon from '@/components/BaseIcon.vue';
 import { mdiMagnify } from '@mdi/js';
 import { reactive, ref, onMounted, watch, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 DataTable.use(DataTablesCore);
+
+const route = useRoute();
+const { id } = route.params;
 
 const selectedKaryawan = ref([]);
 const isShowKaryawan = ref(false);
@@ -195,8 +199,31 @@ const isShowDetail = ref(false);
 onMounted(() => {
   fetchDataKaryawan();
   fetchRoleData();
+  if (id) {
+    updateValue();
+  }
 });
 
+const updateValue = async () => {
+  const result = await service({
+    method: 'GET',
+    url: `/operation/default_users/${id}`,
+    token: true,
+  });
+  if (result.status === 200) {
+    const response = result.response.data;
+    fillForm(response);
+    form.status = statusOptions.find((x) => x.id === response.is_active);
+  }
+};
+
+const fillForm = () => {
+  for (const key in form) {
+    if (key in data) {
+      form[key] = data[key];
+    }
+  }
+};
 const fetchDataKaryawan = async () => {
   const result = await service({
     method: 'GET',
