@@ -56,6 +56,7 @@ const handleLogin = async () => {
   });
   if (result.status === 200) {
     localStorage.setItem('authToken', result.response.token);
+    localStorage.setItem('userData', JSON.stringify(result.response.data));
     router.push('/');
   } else {
     errMessage.value = result.data;
